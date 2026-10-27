@@ -51,6 +51,8 @@
             testingConnection: "Testing connection…",
             apiKeyTitle: "API key",
             apiKeyHelp: "Paste your own key. The provider can be detected automatically.",
+            apiKeysTitle: "API keys",
+            apiKeysDescription: "Save a separate key for each provider you use.",
             apiKey: "API key",
             apiKeyPlaceholder: "Paste API key here",
             saveApiKey: "Save key",
@@ -90,9 +92,9 @@
             transcribing: "Transcribing a speech segment…",
             finalizing: "Finishing your last segment…",
             listening: "Microphone is ready",
-            permissionDenied: "Chrome blocked microphone access. Open Chrome microphone settings, allow access if VoiceFlow is listed, then try again. Also check your computer's microphone privacy settings.",
+            permissionDenied: "Chrome blocked microphone access. Open Chrome microphone settings, allow access if Online Voice Typing is listed, then try again. Also check your computer's microphone privacy settings.",
             openMicSettings: "Open Chrome microphone settings",
-            microphoneSettingsHelp: "In Chrome Settings, allow microphone access, then return to VoiceFlow. Also check your computer’s microphone privacy settings.",
+            microphoneSettingsHelp: "In Chrome Settings, allow microphone access, then return to Online Voice Typing. Also check your computer’s microphone privacy settings.",
             microphoneNoDevice: "No microphone was found. Connect a microphone and try again.",
             microphoneBusy: "Chrome could not use the microphone. Check system microphone privacy settings and close other apps using it.",
             microphoneConstraintError: "The microphone does not support the requested audio settings. Try another microphone.",
@@ -190,6 +192,8 @@
             testingConnection: "در حال آزمایش اتصال…",
             apiKeyTitle: "کلید API",
             apiKeyHelp: "کلید خود را وارد کنید؛ سرویس‌دهنده در صورت امکان خودکار تشخیص داده می‌شود.",
+            apiKeysTitle: "کلیدهای API",
+            apiKeysDescription: "برای هر سرویس‌دهنده‌ای که استفاده می‌کنید یک کلید جداگانه ذخیره کنید.",
             apiKey: "کلید API",
             apiKeyPlaceholder: "کلید API را اینجا وارد کنید",
             saveApiKey: "ذخیرهٔ کلید",
@@ -229,9 +233,9 @@
             transcribing: "در حال تبدیل بخش گفتار به متن…",
             finalizing: "در حال تکمیل آخرین بخش…",
             listening: "میکروفون آماده است",
-            permissionDenied: "Chrome دسترسی میکروفون را مسدود کرده است. تنظیمات میکروفون Chrome را باز کن و اگر VoiceFlow در فهرست بود اجازه بده؛ سپس دوباره تلاش کن. تنظیمات حریم خصوصی میکروفون سیستم را نیز بررسی کن.",
+            permissionDenied: "Chrome دسترسی میکروفون را مسدود کرده است. تنظیمات میکروفون Chrome را باز کن و اگر Online Voice Typing در فهرست بود اجازه بده؛ سپس دوباره تلاش کن. تنظیمات حریم خصوصی میکروفون سیستم را نیز بررسی کن.",
             openMicSettings: "باز کردن تنظیمات میکروفون Chrome",
-            microphoneSettingsHelp: "در تنظیمات Chrome دسترسی میکروفون را اجازه بده و به VoiceFlow برگرد. تنظیمات حریم خصوصی میکروفون در سیستم‌عامل را نیز بررسی کن.",
+            microphoneSettingsHelp: "در تنظیمات Chrome دسترسی میکروفون را اجازه بده و به Online Voice Typing برگرد. تنظیمات حریم خصوصی میکروفون در سیستم‌عامل را نیز بررسی کن.",
             microphoneNoDevice: "هیچ میکروفونی پیدا نشد. میکروفون را وصل کن و دوباره تلاش کن.",
             microphoneBusy: "Chrome نتوانست از میکروفون استفاده کند. تنظیمات حریم خصوصی میکروفون سیستم و برنامه‌های دیگری را که از آن استفاده می‌کنند بررسی کن.",
             microphoneConstraintError: "میکروفون از تنظیمات صوتی درخواستی پشتیبانی نمی‌کند. میکروفون دیگری را امتحان کن.",
@@ -329,6 +333,8 @@
             testingConnection: "جارٍ اختبار الاتصال…",
             apiKeyTitle: "مفتاح API",
             apiKeyHelp: "أدخل مفتاحك؛ يمكن اكتشاف المزوّد تلقائياً عند الإمكان.",
+            apiKeysTitle: "مفاتيح API",
+            apiKeysDescription: "احفظ مفتاحًا منفصلًا لكل مزوّد تستخدمه.",
             apiKey: "مفتاح API",
             apiKeyPlaceholder: "ألصق مفتاح API هنا",
             saveApiKey: "حفظ المفتاح",
@@ -367,9 +373,9 @@
             recording: "جارٍ التسجيل — تحدث بشكل طبيعي",
             transcribing: "جارٍ تحويل مقطع صوتي…",
             finalizing: "جارٍ إنهاء المقطع الأخير…",
-            permissionDenied: "حظر Chrome الوصول إلى الميكروفون. افتح إعدادات الميكروفون في Chrome واسمح بالوصول إذا ظهر VoiceFlow في القائمة، ثم حاول مرة أخرى. تحقق أيضًا من إعدادات خصوصية الميكروفون في النظام.",
+            permissionDenied: "حظر Chrome الوصول إلى الميكروفون. افتح إعدادات الميكروفون في Chrome واسمح بالوصول إذا ظهر Online Voice Typing في القائمة، ثم حاول مرة أخرى. تحقق أيضًا من إعدادات خصوصية الميكروفون في النظام.",
             openMicSettings: "فتح إعدادات الميكروفون في Chrome",
-            microphoneSettingsHelp: "اسمح باستخدام الميكروفون في إعدادات Chrome ثم ارجع إلى VoiceFlow. تحقق أيضًا من إعدادات خصوصية الميكروفون في نظام التشغيل.",
+            microphoneSettingsHelp: "اسمح باستخدام الميكروفون في إعدادات Chrome ثم ارجع إلى Online Voice Typing. تحقق أيضًا من إعدادات خصوصية الميكروفون في نظام التشغيل.",
             microphoneNoDevice: "لم يتم العثور على ميكروفون. وصّل ميكروفونًا ثم حاول مرة أخرى.",
             microphoneBusy: "تعذر على Chrome استخدام الميكروفون. تحقق من إعدادات خصوصية النظام وأغلق التطبيقات الأخرى التي تستخدمه.",
             microphoneConstraintError: "الميكروفون لا يدعم إعدادات الصوت المطلوبة. جرّب ميكروفونًا آخر.",
@@ -466,6 +472,8 @@
             testingConnection: "کنکشن آزمایا جا رہا ہے…",
             apiKeyTitle: "API کلید",
             apiKeyHelp: "اپنی کلید درج کریں؛ ممکن ہونے پر سروس خود پہچانی جائے گی۔",
+            apiKeysTitle: "API کلیدیں",
+            apiKeysDescription: "ہر استعمال ہونے والے فراہم کنندہ کے لیے الگ کلید محفوظ کریں۔",
             apiKey: "API کلید",
             apiKeyPlaceholder: "API کلید یہاں چسپاں کریں",
             saveApiKey: "کلید محفوظ کریں",
@@ -506,9 +514,9 @@
             recording: "ریکارڈنگ جاری ہے — قدرتی انداز میں بولیں",
             finalizing: "آخری حصے کی تکمیل ہو رہی ہے…",
             listening: "مائیکروفون تیار ہے",
-            permissionDenied: "Chrome نے مائیکروفون کی رسائی روک دی ہے۔ Chrome مائیکروفون سیٹنگز کھولیں، اگر فہرست میں VoiceFlow ہو تو اجازت دیں، پھر دوبارہ کوشش کریں۔ کمپیوٹر کی مائیکروفون پرائیویسی سیٹنگز بھی دیکھیں۔",
+            permissionDenied: "Chrome نے مائیکروفون کی رسائی روک دی ہے۔ Chrome مائیکروفون سیٹنگز کھولیں، اگر فہرست میں Online Voice Typing ہو تو اجازت دیں، پھر دوبارہ کوشش کریں۔ کمپیوٹر کی مائیکروفون پرائیویسی سیٹنگز بھی دیکھیں۔",
             openMicSettings: "Chrome مائیکروفون سیٹنگز کھولیں",
-            microphoneSettingsHelp: "Chrome Settings میں مائیکروفون کی اجازت دیں، پھر VoiceFlow پر واپس آئیں۔ کمپیوٹر کی مائیکروفون پرائیویسی سیٹنگز بھی دیکھیں۔",
+            microphoneSettingsHelp: "Chrome Settings میں مائیکروفون کی اجازت دیں، پھر Online Voice Typing پر واپس آئیں۔ کمپیوٹر کی مائیکروفون پرائیویسی سیٹنگز بھی دیکھیں۔",
             microphoneNoDevice: "کوئی مائیکروفون نہیں ملا۔ مائیکروفون منسلک کریں اور دوبارہ کوشش کریں۔",
             microphoneBusy: "Chrome مائیکروفون استعمال نہیں کر سکا۔ سسٹم کی پرائیویسی سیٹنگز دیکھیں اور دوسری مائیکروفون استعمال کرنے والی ایپس بند کریں۔",
             microphoneConstraintError: "مائیکروفون مطلوبہ آڈیو سیٹنگز کو سپورٹ نہیں کرتا۔ دوسرا مائیکروفون آزمائیں۔",
@@ -605,6 +613,8 @@
             testingConnection: "د اړیکې ازموینه روانه ده…",
             apiKeyTitle: "API کیلي",
             apiKeyHelp: "خپله کیلي دننه کړئ؛ خدمت که ممکن وي په خپله پېژندل کېږي.",
+            apiKeysTitle: "API کیلي",
+            apiKeysDescription: "د هر کارېدونکي خدمت لپاره جلا کیلي خوندي کړئ.",
             apiKey: "API کیلي",
             apiKeyPlaceholder: "API کیلي دلته واچوئ",
             saveApiKey: "کیلي ساتل",
@@ -645,9 +655,9 @@
             recording: "ثبت روان دی — په طبیعي ډول خبرې وکړئ",
             finalizing: "وروستۍ برخه بشپړېږي…",
             listening: "مایکروفون چمتو دی",
-            permissionDenied: "Chrome د مایکروفون لاسرسی بنده کړې ده. د Chrome د مایکروفون تنظیمات پرانیزئ، که VoiceFlow په لېست کې وي اجازه ورکړئ او بیا هڅه وکړئ. د کمپیوټر د مایکروفون د محرمیت تنظیمات هم وګورئ.",
+            permissionDenied: "Chrome د مایکروفون لاسرسی بنده کړې ده. د Chrome د مایکروفون تنظیمات پرانیزئ، که Online Voice Typing په لېست کې وي اجازه ورکړئ او بیا هڅه وکړئ. د کمپیوټر د مایکروفون د محرمیت تنظیمات هم وګورئ.",
             openMicSettings: "د Chrome د مایکروفون تنظیمات پرانیستل",
-            microphoneSettingsHelp: "د Chrome په تنظیماتو کې مایکروفون ته اجازه ورکړئ او VoiceFlow ته بېرته راشئ. د کمپیوټر د مایکروفون د محرمیت تنظیمات هم وګورئ.",
+            microphoneSettingsHelp: "د Chrome په تنظیماتو کې مایکروفون ته اجازه ورکړئ او Online Voice Typing ته بېرته راشئ. د کمپیوټر د مایکروفون د محرمیت تنظیمات هم وګورئ.",
             microphoneNoDevice: "مایکروفون ونه موندل شو. مایکروفون وصل کړئ او بیا هڅه وکړئ.",
             microphoneBusy: "Chrome مایکروفون نه شي کارولی. د سیستم د محرمیت تنظیمات وګورئ او هغه نور پروګرامونه بند کړئ چې مایکروفون کاروي.",
             microphoneConstraintError: "مایکروفون غوښتل شوي غږیز تنظیمات نه ملاتړ کوي. بل مایکروفون وازمویئ.",
@@ -748,8 +758,8 @@
             privacyStorageDescription: "Transcript history is stored locally and limited to the latest 20 records. Raw audio is not stored in history by default. You can delete individual records or clear the history.",
             privacyPermissionsTitle: "Permissions",
             privacyPermissionsDescription: "The sidePanel permission opens the side panel; storage saves settings and transcript history; activeTab and scripting support user-requested text insertion; clipboardWrite supports copy actions. Host permissions are limited to the listed provider API domains.",
-            aboutVoiceFlowTitle: "About VoiceFlow Online",
-            aboutVoiceFlowDescription: "VoiceFlow Online is an independent online Chrome extension. It includes no offline AI model and does not connect to a separate Python app. Provider availability, data handling, quotas and prices may change."
+            aboutVoiceFlowTitle: "About Online Voice Typing",
+            aboutVoiceFlowDescription: "Online Voice Typing is an independent Chrome extension by NR Company. It includes no offline AI model. Provider availability, data handling, quotas and prices may change."
         },
         fa: {
             microphoneReadyTitle: "میکروفون آماده است",
@@ -796,8 +806,8 @@
             privacyStorageDescription: "تاریخچهٔ متن به‌صورت محلی ذخیره و به ۲۰ مورد اخیر محدود می‌شود. فایل صوتی خام به‌طور پیش‌فرض در تاریخچه ذخیره نمی‌شود. می‌توانید هر مورد یا تمام تاریخچه را حذف کنید.",
             privacyPermissionsTitle: "مجوزها",
             privacyPermissionsDescription: "مجوز sidePanel پنل را باز می‌کند؛ storage تنظیمات و تاریخچه را نگه می‌دارد؛ activeTab و scripting برای درج متن با درخواست کاربر استفاده می‌شوند؛ clipboardWrite برای کپی است. دسترسی شبکه به دامنه‌های API مشخص‌شده محدود است.",
-            aboutVoiceFlowTitle: "دربارهٔ VoiceFlow Online",
-            aboutVoiceFlowDescription: "VoiceFlow Online یک افزونهٔ مستقل Chrome برای پردازش آنلاین است. مدل هوش مصنوعی آفلاین ندارد و به برنامهٔ جداگانهٔ Python وصل نمی‌شود. دسترسی سرویس‌ها، سیاست داده، سهمیه و قیمت‌ها ممکن است تغییر کند."
+            aboutVoiceFlowTitle: "دربارهٔ Online Voice Typing",
+            aboutVoiceFlowDescription: "Online Voice Typing یک افزونهٔ مستقل Chrome از NR Company برای پردازش آنلاین است. مدل هوش مصنوعی آفلاین ندارد. دسترسی سرویس‌ها، سیاست داده، سهمیه و قیمت‌ها ممکن است تغییر کند."
         },
         ps: {
             microphoneReadyTitle: "مایکروفون چمتو دی",
@@ -846,8 +856,8 @@
             privacyStorageDescription: "د متن تاریخچه محلي ساتل کېږي او وروستیو ۲۰ توکو ته محدوده ده. خام غږ په عادي ډول نه ساتل کېږي. یو توکی یا ټوله تاریخچه حذفولی شئ.",
             privacyPermissionsTitle: "اجازې",
             privacyPermissionsDescription: "sidePanel د غاړې پینل پرانیزي؛ storage تنظیمات او تاریخچه ساتي؛ activeTab او scripting د کاروونکي په غوښتنه متن ورزیاتوي؛ clipboardWrite د کاپي لپاره دی. د شبکې اجازه یوازې ټاکل شوو API ډومېنونو ته ده.",
-            aboutVoiceFlowTitle: "د VoiceFlow Online په اړه",
-            aboutVoiceFlowDescription: "VoiceFlow Online د Chrome خپلواک آنلاین اېکسټېنشن دی. آفلاین AI ماډل نه لري او له جلا Python پروګرام سره اړیکه نه لري. د خدمتونو شتون، پالیسۍ، ونډه او بیې بدلېدای شي."
+            aboutVoiceFlowTitle: "د Online Voice Typing په اړه",
+            aboutVoiceFlowDescription: "Online Voice Typing د NR Company خپلواک آنلاین Chrome اېکسټېنشن دی. آفلاین AI ماډل نه لري. د خدمتونو شتون، پالیسۍ، ونډه او بیې بدلېدای شي."
         },
         ar: {
             microphoneReadyTitle: "الميكروفون جاهز",
@@ -896,8 +906,8 @@
             privacyStorageDescription: "يُخزن سجل النصوص محليًا ويقتصر على آخر 20 سجلًا. لا يُحفظ الصوت الخام في السجل افتراضيًا. يمكنك حذف سجل فردي أو مسح السجل كله.",
             privacyPermissionsTitle: "الأذونات",
             privacyPermissionsDescription: "يفتح sidePanel اللوحة؛ ويحفظ storage الإعدادات والسجل؛ ويدعم activeTab وscripting إدراج النص بطلب المستخدم؛ ويدعم clipboardWrite النسخ. تقتصر أذونات المضيف على نطاقات API المحددة.",
-            aboutVoiceFlowTitle: "حول VoiceFlow Online",
-            aboutVoiceFlowDescription: "VoiceFlow Online إضافة Chrome مستقلة تعمل عبر الإنترنت. لا تتضمن نموذج ذكاء اصطناعي دون اتصال ولا تتصل بتطبيق Python منفصل. قد يتغير توفر المزوّدين وسياسات البيانات والحصص والأسعار."
+            aboutVoiceFlowTitle: "حول Online Voice Typing",
+            aboutVoiceFlowDescription: "Online Voice Typing إضافة Chrome مستقلة من NR Company تعمل عبر الإنترنت. لا تتضمن نموذج ذكاء اصطناعي دون اتصال. قد يتغير توفر المزوّدين وسياسات البيانات والحصص والأسعار."
         },
         ur: {
             microphoneReadyTitle: "مائیکروفون تیار ہے",
@@ -946,8 +956,8 @@
             privacyStorageDescription: "متن کی تاریخ مقامی طور پر محفوظ ہوتی ہے اور تازہ ترین 20 ریکارڈ تک محدود ہے۔ خام آڈیو عام طور پر محفوظ نہیں ہوتی۔ آپ ایک ریکارڈ یا پوری تاریخ حذف کر سکتے ہیں۔",
             privacyPermissionsTitle: "اجازتیں",
             privacyPermissionsDescription: "sidePanel پینل کھولتا ہے؛ storage ترتیبات اور تاریخ محفوظ کرتا ہے؛ activeTab اور scripting صارف کی درخواست پر متن شامل کرتے ہیں؛ clipboardWrite کاپی کرنے کے لیے ہے۔ نیٹ ورک کی اجازت مخصوص API ڈومینز تک محدود ہے۔",
-            aboutVoiceFlowTitle: "VoiceFlow Online کے بارے میں",
-            aboutVoiceFlowDescription: "VoiceFlow Online ایک آزاد آن لائن Chrome ایکسٹینشن ہے۔ اس میں آف لائن AI ماڈل نہیں اور یہ الگ Python ایپ سے منسلک نہیں۔ خدمات کی دستیابی، پالیسیاں، کوٹے اور قیمتیں بدل سکتی ہیں۔"
+            aboutVoiceFlowTitle: "Online Voice Typing کے بارے میں",
+            aboutVoiceFlowDescription: "Online Voice Typing NR Company کی آزاد آن لائن Chrome ایکسٹینشن ہے۔ اس میں آف لائن AI ماڈل نہیں۔ خدمات کی دستیابی، پالیسیاں، کوٹے اور قیمتیں بدل سکتی ہیں۔"
         }
     };
 

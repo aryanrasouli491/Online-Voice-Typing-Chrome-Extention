@@ -7,13 +7,13 @@ const PAGE_TEXT = {
     status: "Your microphone has not been accessed yet.",
     requestButton: "Enable Microphone",
     settingsButton: "Open Chrome Microphone Settings",
-    closeButton: "Close this tab and return to VoiceFlow",
+    closeButton: "Close this tab and return to Online Voice Typing",
     privacy: "This step only checks microphone permission. It does not start a recording or upload audio to Groq, Gemini, OpenRouter, or any other service.",
-    footer: "After allowing access, return to the VoiceFlow side panel and click Start Recording.",
+    footer: "After allowing access, return to the Online Voice Typing side panel and click Start Recording.",
     grantedTitle: "Microphone access is allowed",
     grantedText: "Permission was granted successfully. No recording was started and no audio was uploaded.",
     blockedTitle: "Chrome has blocked microphone access",
-    blockedText: "Chrome remembers a blocked permission and will not show the prompt again until you change it. Open Chrome settings and allow the microphone for VoiceFlow.",
+    blockedText: "Chrome remembers a blocked permission and will not show the prompt again until you change it. Open Chrome settings and allow the microphone for Online Voice Typing.",
     dismissedTitle: "Chrome did not grant microphone access",
     dismissedText: "The request was dismissed or blocked by browser settings. Try again, or open Chrome microphone settings and allow access.",
     noDevice: "No microphone was found. Connect a microphone and try again.",
@@ -30,13 +30,13 @@ const PAGE_TEXT = {
     status: "هنوز به میکروفون دسترسی گرفته نشده است.",
     requestButton: "فعال‌سازی میکروفون",
     settingsButton: "بازکردن تنظیمات میکروفون Chrome",
-    closeButton: "بستن این زبانه و بازگشت به VoiceFlow",
+    closeButton: "بستن این زبانه و بازگشت به Online Voice Typing",
     privacy: "این مرحله فقط اجازهٔ میکروفون را بررسی می‌کند. ضبط آغاز نمی‌شود و صدا به Groq، Gemini، OpenRouter یا هیچ سرویس دیگری فرستاده نمی‌شود.",
-    footer: "پس از اجازه‌دادن، به پنل VoiceFlow برگردید و روی شروع ضبط کلیک کنید.",
+    footer: "پس از اجازه‌دادن، به پنل Online Voice Typing برگردید و روی شروع ضبط کلیک کنید.",
     grantedTitle: "اجازهٔ میکروفون داده شد",
     grantedText: "اجازه با موفقیت داده شد. ضبط آغاز نشده و هیچ صدایی آپلود نشده است.",
     blockedTitle: "Chrome دسترسی میکروفون را مسدود کرده است",
-    blockedText: "Chrome اجازهٔ مسدودشده را به خاطر سپرده و تا زمان تغییر تنظیمات دوباره درخواست نمی‌کند. تنظیمات Chrome را باز کنید و اجازهٔ میکروفون را برای VoiceFlow فعال سازید.",
+    blockedText: "Chrome اجازهٔ مسدودشده را به خاطر سپرده و تا زمان تغییر تنظیمات دوباره درخواست نمی‌کند. تنظیمات Chrome را باز کنید و اجازهٔ میکروفون را برای Online Voice Typing فعال سازید.",
     dismissedTitle: "اجازهٔ میکروفون داده نشد",
     dismissedText: "درخواست بسته یا توسط تنظیمات مرورگر مسدود شد. دوباره تلاش کنید یا تنظیمات میکروفون Chrome را باز کرده و اجازه دهید.",
     noDevice: "هیچ میکروفونی پیدا نشد. میکروفون را وصل کرده و دوباره تلاش کنید.",
@@ -53,13 +53,13 @@ const PAGE_TEXT = {
     status: "تر اوسه مایکروفون نه دی کارول شوی.",
     requestButton: "مایکروفون فعال کړئ",
     settingsButton: "د Chrome د مایکروفون تنظیمات پرانیزئ",
-    closeButton: "دا ټب بند او VoiceFlow ته بېرته لاړ شئ",
+    closeButton: "دا ټب بند او Online Voice Typing ته بېرته لاړ شئ",
     privacy: "دا ګام یوازې د مایکروفون اجازه ازمويي. ثبت نه پیلوي او غږ هېڅ خدمت ته نه لېږي.",
-    footer: "له اجازې وروسته د VoiceFlow پینل ته بېرته لاړ شئ او Start Recording ووهئ.",
+    footer: "له اجازې وروسته د Online Voice Typing پینل ته بېرته لاړ شئ او Start Recording ووهئ.",
     grantedTitle: "مایکروفون ته اجازه ورکړل شوه",
     grantedText: "اجازه په بریالیتوب ورکړل شوه. ثبت نه دی پیل شوی او غږ نه دی لېږل شوی.",
     blockedTitle: "Chrome د مایکروفون اجازه بنده کړې",
-    blockedText: "Chrome بنده شوې اجازه په یاد ساتي. د Chrome تنظیمات پرانیزئ او د VoiceFlow لپاره د مایکروفون اجازه فعاله کړئ.",
+    blockedText: "Chrome بنده شوې اجازه په یاد ساتي. د Chrome تنظیمات پرانیزئ او د Online Voice Typing لپاره د مایکروفون اجازه فعاله کړئ.",
     dismissedTitle: "د مایکروفون اجازه ترلاسه نه شوه",
     dismissedText: "غوښتنه بنده یا د براوزر د تنظیماتو له خوا محدوده شوه. بیا هڅه وکړئ یا د Chrome د مایکروفون تنظیمات پرانیزئ.",
     noDevice: "مایکروفون ونه موندل شو. مایکروفون وصل کړئ او بیا هڅه وکړئ.",
@@ -76,13 +76,13 @@ const PAGE_TEXT = {
     status: "لم يتم الوصول إلى الميكروفون بعد.",
     requestButton: "تفعيل الميكروفون",
     settingsButton: "فتح إعدادات ميكروفون Chrome",
-    closeButton: "إغلاق علامة التبويب والعودة إلى VoiceFlow",
+    closeButton: "إغلاق علامة التبويب والعودة إلى Online Voice Typing",
     privacy: "تتحقق هذه الخطوة من إذن الميكروفون فقط. لا تبدأ التسجيل ولا ترسل الصوت إلى أي خدمة.",
-    footer: "بعد السماح، ارجع إلى لوحة VoiceFlow واضغط على Start Recording.",
+    footer: "بعد السماح، ارجع إلى لوحة Online Voice Typing واضغط على Start Recording.",
     grantedTitle: "تم السماح بالميكروفون",
     grantedText: "تم منح الإذن بنجاح. لم يبدأ التسجيل ولم يتم رفع أي صوت.",
     blockedTitle: "حظر Chrome الوصول إلى الميكروفون",
-    blockedText: "يتذكر Chrome الإذن المحظور. افتح إعدادات Chrome واسمح للميكروفون في VoiceFlow.",
+    blockedText: "يتذكر Chrome الإذن المحظور. افتح إعدادات Chrome واسمح للميكروفون في Online Voice Typing.",
     dismissedTitle: "لم يتم منح إذن الميكروفون",
     dismissedText: "تم إغلاق الطلب أو منعه من إعدادات المتصفح. حاول مرة أخرى أو افتح إعدادات الميكروفون.",
     noDevice: "لم يتم العثور على ميكروفون. وصّل ميكروفونًا ثم حاول مرة أخرى.",
@@ -99,13 +99,13 @@ const PAGE_TEXT = {
     status: "ابھی تک مائیکروفون تک رسائی نہیں ہوئی۔",
     requestButton: "مائیکروفون فعال کریں",
     settingsButton: "Chrome مائیکروفون کی ترتیبات کھولیں",
-    closeButton: "یہ ٹیب بند کرکے VoiceFlow پر واپس جائیں",
+    closeButton: "یہ ٹیب بند کرکے Online Voice Typing پر واپس جائیں",
     privacy: "یہ مرحلہ صرف مائیکروفون کی اجازت چیک کرتا ہے۔ ریکارڈنگ شروع نہیں ہوتی اور آواز کسی سروس کو نہیں بھیجی جاتی۔",
-    footer: "اجازت دینے کے بعد VoiceFlow پینل پر واپس جا کر Start Recording دبائیں۔",
+    footer: "اجازت دینے کے بعد Online Voice Typing پینل پر واپس جا کر Start Recording دبائیں۔",
     grantedTitle: "مائیکروفون کی اجازت مل گئی",
     grantedText: "اجازت کامیابی سے مل گئی۔ ریکارڈنگ شروع نہیں ہوئی اور کوئی آڈیو اپ لوڈ نہیں ہوئی۔",
     blockedTitle: "Chrome نے مائیکروفون روک دیا ہے",
-    blockedText: "Chrome مسدود اجازت یاد رکھتا ہے۔ Chrome ترتیبات کھولیں اور VoiceFlow کے لیے مائیکروفون کی اجازت دیں۔",
+    blockedText: "Chrome مسدود اجازت یاد رکھتا ہے۔ Chrome ترتیبات کھولیں اور Online Voice Typing کے لیے مائیکروفون کی اجازت دیں۔",
     dismissedTitle: "مائیکروفون کی اجازت نہیں ملی",
     dismissedText: "درخواست بند ہو گئی یا براؤزر نے روک دی۔ دوبارہ کوشش کریں یا Chrome مائیکروفون ترتیبات کھولیں۔",
     noDevice: "کوئی مائیکروفون نہیں ملا۔ مائیکروفون جوڑ کر دوبارہ کوشش کریں۔",
@@ -140,12 +140,12 @@ function applyPageText() {
     if (strings[key]) element.textContent = strings[key];
   });
   const titles = {
-    fa: "VoiceFlow — اجازهٔ میکروفون",
-    ps: "VoiceFlow — د مایکروفون اجازه",
-    ar: "VoiceFlow — إذن الميكروفون",
-    ur: "VoiceFlow — مائیکروفون کی اجازت"
+    fa: "Online Voice Typing — اجازهٔ میکروفون",
+    ps: "Online Voice Typing — د مایکروفون اجازه",
+    ar: "Online Voice Typing — إذن الميكروفون",
+    ur: "Online Voice Typing — مائیکروفون کی اجازت"
   };
-  document.title = titles[language] || "VoiceFlow — Microphone Permission";
+  document.title = titles[language] || "Online Voice Typing — Microphone Permission";
 }
 
 async function getPermissionState() {
@@ -251,10 +251,15 @@ async function closeCurrentTab() {
 }
 
 async function initialize() {
-  const saved = await chrome.storage.local.get(["interfaceLanguage", "theme"]);
+  // Settings are stored together by the side panel. Reading the same object keeps
+  // the permission tab in the user's chosen interface language and theme.
+  const saved = await chrome.storage.local.get("voiceFlowSettings");
+  const settings = saved.voiceFlowSettings && typeof saved.voiceFlowSettings === "object"
+    ? saved.voiceFlowSettings
+    : {};
   const supportedLanguages = ["en", "fa", "ps", "ar", "ur"];
-  language = supportedLanguages.includes(saved.interfaceLanguage) ? saved.interfaceLanguage : "en";
-  theme = saved.theme === "light" ? "light" : "dark";
+  language = supportedLanguages.includes(settings.interfaceLanguage) ? settings.interfaceLanguage : "en";
+  theme = settings.theme === "light" ? "light" : "dark";
   applyPageText();
   $("#requestPermissionButton").addEventListener("click", requestPermission);
   $("#openSettingsButton").addEventListener("click", openChromeMicrophoneSettings);

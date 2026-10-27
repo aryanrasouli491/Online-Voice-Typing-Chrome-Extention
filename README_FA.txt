@@ -1,4 +1,4 @@
-راهنمای نصب Online Voice Typing — NR Company نسخهٔ 2.1.0
+راهنمای نصب Online Voice Typing — NR Company نسخهٔ 2.2.0
 
 ۱. فایل ZIP را دانلود و در یک پوشه استخراج کنید.
 ۲. در Chrome آدرس `chrome://extensions` را باز کنید.

@@ -254,6 +254,28 @@
         // Keep the user's mute choice across Pause/Resume, including a newly opened stream.
         mediaStream.getAudioTracks().forEach((track) => {
             track.enabled = !microphoneMuted;
+            // A device can be unplugged or disabled by the operating system while a
+            // session is active. End the recorder in that case so the interface does
+            // not stay in a misleading recording state.
+            track.addEventListener("ended", () => {
+                if (sessionState !== "recording" && sessionState !== "requesting") {
+                    return;
+                }
+
+                if (typeof callbacks.onError === "function") {
+                    callbacks.onError(new Error("The microphone was disconnected or became unavailable."));
+                }
+
+                sessionState = "stopping";
+                stopSpeechMonitor();
+
+                if (activeRecorder && activeRecorder.state === "recording") {
+                    recorderStopPending = true;
+                    activeRecorder.stop();
+                } else {
+                    finishSession();
+                }
+            }, { once: true });
         });
 
         try {

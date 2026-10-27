@@ -1,6 +1,6 @@
-# Online Voice Typing — NR Company v2.1.0
+# Online Voice Typing | NR Company v2.2.0
 
-Online Voice Typing is a standalone Chrome Manifest V3 extension for online speech-to-text. The product interface now uses NR Company branding and includes a fixed About section describing the planned company, its founder, and its software projects.
+Online Voice Typing is a standalone Chrome Manifest V3 extension for online speech-to-text. It is a lightweight, client-side NR Company project with no backend, account system, analytics, or bundled API key.
 
 ## Install for personal use or friends
 
@@ -38,4 +38,39 @@ The app identifies the brand as **NR Company**, full name **Nooraqa Rasouli Comp
 - User-supplied provider keys are stored in the browser profile.
 - Local transcript history is stored in the browser and does not save raw audio by default.
 
-See `README_FA.txt` for Dari/Persian installation guidance and `docs/PRIVACY_AND_SECURITY.txt` for security limitations.
+## Features and daily use
+
+- Speech-to-text from a microphone, with real Pause, Resume, Stop, and mute controls.
+- Audio-file transcription for supported audio formats up to 18 MB.
+- User-selected Groq, Google Gemini, or OpenRouter provider and model.
+- Transcript editing, copy, TXT export, active-page insertion, and bounded local history.
+- Light/dark themes plus English, Dari/Persian, Pashto, Arabic, and Urdu interfaces.
+
+Starting a successful new recording clears only the main editor. It does not remove saved settings, API keys, or transcript history. Use **More options → Transcription Settings** to select a provider and save your own matching API key, allow microphone access in the dedicated Chrome tab, enable **Online Voice Typing**, then start recording. For OpenRouter, confirm the metered-use notice before transcription.
+
+## Privacy, security, and troubleshooting
+
+- This is an online extension: a supported API, internet access, and a user-owned API key are required. Provider availability, pricing, quotas, retention, and regional access can change.
+- Audio is sent only after online mode is enabled and the user starts a recording or explicitly transcribes a file. The extension cannot recall audio already submitted to a provider.
+- API keys are stored in `chrome.storage.local`, which is not encrypted secret storage. Remove a key with its **Remove key** button and rotate/revoke it through the provider if it may be exposed.
+- If microphone access is blocked, open Chrome microphone settings from the extension. For unavailable/busy microphones, reconnect the device, close competing applications, and check operating-system microphone privacy settings.
+- A failed transcription can indicate an invalid key, missing model access, quota/billing limit, or network problem. A connection test does not guarantee model availability.
+
+See `README_FA.txt` for Dari/Persian installation guidance and `docs/PRIVACY_AND_SECURITY.txt` for detailed data-flow and security limitations.
+
+## Development and verification
+
+No build step or runtime dependencies are required. Run the dependency-free checks before contributing:
+
+```powershell
+node tests/validate-extension.js
+Get-ChildItem js -Filter *.js | ForEach-Object { node --check $_.FullName }
+```
+
+The validation checks Manifest V3 metadata, shipped paths, duplicate IDs, local resources, translation keys, unsafe dynamic-code markers, and likely real credentials. It does not substitute for a physical microphone, installed Chrome, or live provider credentials.
+
+Read [CONTRIBUTING.md](CONTRIBUTING.md) before sending changes and use [SECURITY.md](SECURITY.md) for private security reporting.
+
+## License
+
+No `LICENSE` file is present in the current repository history. A license should be selected and added by the repository owner before public redistribution so contributors and users know their rights. This update does not invent or replace the project's legal terms.

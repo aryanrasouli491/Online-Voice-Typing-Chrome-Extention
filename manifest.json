@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Online Voice Typing | NR Company",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Online Voice Typing by NR Company — multilingual speech-to-text for Chrome.",
   "minimum_chrome_version": "114",
   "permissions": [

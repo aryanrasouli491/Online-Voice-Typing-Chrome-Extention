@@ -1,4 +1,4 @@
-// Open the VoiceFlow side panel when the toolbar icon is clicked.
+// Open the Online Voice Typing side panel when the toolbar icon is clicked.
 chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true });
 
 // The dedicated permission page reports when Chrome grants or blocks microphone access.
