@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+ 
+<!-- HEAD: Sets the page title, screen size, styles, and logo display. -->
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="light dark" name="color-scheme"/>
+  <title>
+   Online Voice Typing | NR Company
+  </title>
+  <link href="css/sidepanel.css" rel="stylesheet"/>
+  
+<!-- Keep the supplied company logo inside the existing header logo area. -->
+  <style>
+   .brand-mark-nr {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .brand-logo-image {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+  </style>
+ </head>
+ 
+<!-- BODY: The visible application starts here. -->
+<body>
+  
+<!-- APP SHELL: Keeps all screens inside the extension side panel. -->
+<div class="app-shell">
+   
+<!-- HEADER: Shows the company logo, app name, status, and quick buttons. -->
+<header class="app-header">
+    <div class="brand-block">
+     
+<!-- COMPANY LOGO: Uses the supplied image instead of the old NP mark. -->
+<div aria-label="NR Company logo" class="brand-mark brand-mark-nr" role="img">
+      <img alt="Nooraqa Rasouli — NR Company logo" class="brand-logo-image" src="icons/nr-company-logo.png"/>
+     </div>
+     <div>
+      <div class="brand-name">
+       Online Voice Typing
+      </div>
+      <div class="brand-subtitle">
+       by NR Company
+      </div>
+     </div>
+    </div>
+    <div class="header-actions">
+     <div aria-live="polite" class="header-status">
+      <span aria-hidden="true" class="header-status-dot">
+      </span>
+      <span data-i18n="readyStatus">
+       Ready
+      </span>
+     </div>
+     <button aria-label="Change theme" class="icon-button" data-i18n-aria="themeToggle" id="themeButton" title="Change theme" type="button">
+      <svg aria-hidden="true" class="icon icon-theme" fill="none" viewbox="0 0 24 24">
+       <path d="M20.2 15.1A8.2 8.2 0 0 1 8.9 3.8a8.3 8.3 0 1 0 11.3 11.3Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+       </path>
+      </svg>
+     </button>
+     <button aria-label="More options" class="icon-button" data-i18n-aria="moreOptions" id="headerMoreOptionsButton" title="More options" type="button">
+      <svg aria-hidden="true" class="icon" fill="currentColor" viewbox="0 0 24 24">
+       <circle cx="5" cy="12" r="1.7">
+       </circle>
+       <circle cx="12" cy="12" r="1.7">
+       </circle>
+       <circle cx="19" cy="12" r="1.7">
+       </circle>
+      </svg>
+     </button>
+    </div>
+   </header>
+   
+<!-- MAIN VIEW: Contains the voice recording screen and transcript editor. -->
+<main class="view is-visible" id="mainView">
+    <section class="hero-copy">
+     <h1 data-i18n="heroTitle">
+      Turn speech into text.
+     </h1>
+     <p data-i18n="heroSubtitle">
+      Speak naturally. Get accurate results.
+     </p>
+    </section>
+    
+<!-- MICROPHONE PERMISSION: Explains and requests microphone access. -->
+<section class="permission-card" id="permissionCard">
+     <div class="permission-copy">
+      <div class="mini-icon">
+       <svg aria-hidden="true" fill="none" viewbox="0 0 24 24">
+        <path d="M12 3.5a3.2 3.2 0 0 0-3.2 3.2v4.9a3.2 3.2 0 0 0 6.4 0V6.7A3.2 3.2 0 0 0 12 3.5Z" stroke="currentColor" stroke-width="1.8">
+        </path>
+        <path d="M6.2 10.8v.8a5.8 5.8 0 0 0 11.6 0v-.8M12 17.4v3.1m-3.2 0h6.4" stroke="currentColor" stroke-linecap="round" stroke-width="1.8">
+        </path>
+       </svg>
+      </div>
+      <div class="permission-text">
+       <strong data-i18n="micPermissionTitle" id="permissionCardTitle">
+        Microphone access
+       </strong>
+       <span data-i18n="micPermissionDescription" id="permissionDescription">
+        Allow microphone access before your first recording.
+       </span>
+       <button class="microphone-help-link" data-i18n="openMicSettings" hidden="" id="openMicrophoneSettingsButton" type="button">
+        Open Chrome microphone settings
+       </button>
+      </div>
+     </div>
+     <button class="button button-secondary button-small" data-i18n="enableMic" id="enableMicrophoneButton" type="button">
+      Enable microphone
+     </button>
+    </section>
+    
+<!-- RECORDING CONTROLS: Starts, pauses, and stops speech recording. -->
+<section aria-label="Voice recording controls" class="recording-card">
+     <div class="recording-status-row">
+      <span class="status-dot" id="statusDot">
+      </span>
+      <span data-i18n="readyToRecord" id="recordingStatus">
+       Ready to record
+      </span>
+      <span aria-live="off" class="timer" id="recordingTimer">
+       00:00
+      </span>
+      <button aria-label="Mute microphone" class="icon-button microphone-mute-button" data-i18n-aria="muteMicrophone" hidden="" id="muteMicrophoneButton" title="Mute microphone" type="button">
+       <svg aria-hidden="true" class="mute-icon" fill="none" viewbox="0 0 24 24">
+        <rect height="11" rx="3" stroke="currentColor" stroke-width="1.8" width="6" x="9" y="3">
+        </rect>
+        <path d="M6.5 10.5a5.5 5.5 0 0 0 11 0M12 16v4m-3 0h6" stroke="currentColor" stroke-linecap="round" stroke-width="1.8">
+        </path>
+       </svg>
+       <svg aria-hidden="true" class="unmute-icon" fill="none" viewbox="0 0 24 24">
+        <path d="M4 4 20 20M9 9v1.5a3 3 0 0 0 5.1 2.1M15 9V6a3 3 0 0 0-5.8-1M6.5 10.5a5.5 5.5 0 0 0 9.2 4M17.5 10.5a5.5 5.5 0 0 1-.5 2.3M12 16v4m-3 0h6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+        </path>
+       </svg>
+      </button>
+     </div>
+     <button aria-label="Start recording or allow microphone access" class="microphone-orb" data-i18n-aria="microphoneOrbLabel" id="microphoneOrbButton" type="button">
+      <svg aria-hidden="true" fill="none" viewbox="0 0 24 24">
+       <rect fill="currentColor" height="11" rx="3" width="6" x="9" y="3">
+       </rect>
+       <path d="M6.5 10.5a5.5 5.5 0 0 0 11 0M12 16v4m-3 0h6" stroke="currentColor" stroke-linecap="round" stroke-width="1.8">
+       </path>
+      </svg>
+     </button>
+     <p class="recording-subtitle" data-i18n="startHint">
+      Press the button below to start
+     </p>
+     <div aria-hidden="true" class="waveform" id="waveform">
+      <span>
+      </span>
+      <span>
+      </span>
+      <span>
+      </span>
+      <span>
+      </span>
+      <span>
+      </span>
+      <span>
+      </span>
+      <span>
+      </span>
+      <span>
+      </span>
+      <span>
+      </span>
+      <span>
+      </span>
+      <span>
+      </span>
+      <span>
+      </span>
+      <span>
+      </span>
+      <span>
+      </span>
+      <span>
+      </span>
+     </div>
+     <div class="recording-buttons" id="recordingButtons">
+      <button class="button button-primary" id="startRecordingButton" type="button">
+       <svg aria-hidden="true" fill="none" viewbox="0 0 24 24">
+        <circle cx="12" cy="12" fill="currentColor" r="8.5">
+        </circle>
+       </svg>
+       <span data-i18n="startRecording">
+        Start recording
+       </span>
+      </button>
+      <button class="button button-secondary button-pause" disabled="" hidden="" id="pauseRecordingButton" type="button">
+       <svg aria-hidden="true" fill="none" viewbox="0 0 24 24">
+        <rect fill="currentColor" height="14" rx="1" width="4" x="6" y="5">
+        </rect>
+        <rect fill="currentColor" height="14" rx="1" width="4" x="14" y="5">
+        </rect>
+       </svg>
+       <span data-i18n="pauseRecording">
+        Pause
+       </span>
+      </button>
+      <button class="button button-stop" disabled="" hidden="" id="stopRecordingButton" type="button">
+       <svg aria-hidden="true" fill="none" viewbox="0 0 24 24">
+        <rect fill="currentColor" height="12" rx="2" width="12" x="6" y="6">
+        </rect>
+       </svg>
+       <span data-i18n="stop">
+        Stop
+       </span>
+      </button>
+     </div>
+     <p class="pause-hint" data-i18n="pauseHint">
+      Text appears after a short pause in your speech.
+     </p>
+    </section>
+    
+<!-- TRANSCRIPT EDITOR: Shows recognized speech and copy or export actions. -->
+<section class="transcript-section">
+     <div class="section-heading">
+      <div class="section-title-wrap">
+       <svg aria-hidden="true" class="section-icon" fill="none" viewbox="0 0 24 24">
+        <path d="M7 3.8h7l4 4V20H7a2 2 0 0 1-2-2V5.8a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-linejoin="round" stroke-width="1.7">
+        </path>
+        <path d="M14 4v4h4M8.5 12h7M8.5 15.5h7" stroke="currentColor" stroke-linecap="round" stroke-width="1.7">
+        </path>
+       </svg>
+       <h2 data-i18n="recognizedText">
+        Recognized text
+       </h2>
+      </div>
+      <div class="transcript-heading-actions">
+       <span aria-label="Character count" class="word-count" id="characterCount">
+        0/5000
+       </span>
+       <button aria-controls="transcriptText" aria-expanded="false" class="icon-button transcript-expand-button" data-i18n-aria="expandTranscript" id="expandTranscriptButton" title="Expand transcript" type="button">
+        <svg aria-hidden="true" fill="none" viewbox="0 0 24 24">
+         <path class="expand-glyph" d="M8 4H4v4M16 4h4v4M20 16v4h-4M4 16v4h4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+         </path>
+         <path class="collapse-glyph" d="M4 8V4h4M16 4h4v4M20 16v4h-4M8 20H4v-4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+         </path>
+        </svg>
+       </button>
+      </div>
+     </div>
+     <textarea class="transcript-input" data-i18n-placeholder="transcriptPlaceholder" id="transcriptText" placeholder="Your transcription will appear here..." rows="5" spellcheck="true"></textarea>
+     <div class="text-actions">
+      <button class="button button-secondary" id="copyTextButton" type="button">
+       <svg aria-hidden="true" fill="none" viewbox="0 0 24 24">
+        <rect height="12" rx="2" stroke="currentColor" stroke-width="1.7" width="11" x="8" y="8">
+        </rect>
+        <path d="M15 8V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h2" stroke="currentColor" stroke-width="1.7">
+        </path>
+       </svg>
+       <span data-i18n="copyText">
+        Copy text
+       </span>
+      </button>
+      <button class="button button-quiet" id="exportTextButton" type="button">
+       <svg aria-hidden="true" fill="none" viewbox="0 0 24 24">
+        <path d="M12 3v11m-4-4 4 4 4-4M5 17v3h14v-3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7">
+        </path>
+       </svg>
+       <span data-i18n="exportText">
+        Export
+       </span>
+      </button>
+     </div>
+    </section>
+    
+<!-- ONLINE MODE: Controls whether audio may be sent to the selected provider. -->
+<section class="online-card">
+     <label class="checkbox-row" for="onlineVoiceTypingCheckbox">
+      <span class="checkbox-copy">
+       <strong data-i18n="onlineVoiceTyping">
+        Online Voice Typing
+       </strong>
+       <span data-i18n="onlineSubtitle">
+        Use your selected online provider
+       </span>
+      </span>
+      <input id="onlineVoiceTypingCheckbox" type="checkbox"/>
+      <span aria-hidden="true" class="custom-checkbox">
+      </span>
+     </label>
+     <p class="inline-warning" data-i18n="onlineWarning" hidden="" id="onlineWarning">
+      When enabled, recorded audio is sent to the selected online provider for transcription. Accuracy and usage costs may vary.
+     </p>
+     <p class="offline-note" data-i18n="offlineNote" id="offlineNote">
+      This extension does not include offline AI transcription.
+     </p>
+    </section>
+    <button class="more-options-button" id="moreOptionsButton" type="button">
+     <span aria-hidden="true" class="more-icon">
+      <svg fill="none" viewbox="0 0 24 24">
+       <circle cx="5" cy="12" fill="currentColor" r="1.6">
+       </circle>
+       <circle cx="12" cy="12" fill="currentColor" r="1.6">
+       </circle>
+       <circle cx="19" cy="12" fill="currentColor" r="1.6">
+       </circle>
+      </svg>
+     </span>
+     <span data-i18n="moreOptions">
+      More options
+     </span>
+     <svg aria-hidden="true" class="chevron-icon" fill="none" viewbox="0 0 24 24">
+      <path d="m8 10 4 4 4-4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+      </path>
+     </svg>
+    </button>
+    <p class="footer-note" data-i18n="privacyShort">
+     Your audio is sent only when online mode is enabled and you record.
+    </p>
+   </main>
+   
+<!-- OPTIONS VIEW: Links to settings and extra tools. -->
+<main class="view" hidden="" id="optionsView">
+    <div class="view-heading">
+     <button class="back-button" data-back-main="" type="button">
+      <svg aria-hidden="true" fill="none" viewbox="0 0 24 24">
+       <path d="m14.5 5-7 7 7 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+       </path>
+      </svg>
+      <span data-i18n="backToVoiceTyping">
+       Back to voice typing
+      </span>
+     </button>
+     <h1 data-i18n="moreOptions">
+      More options
+     </h1>
+     <p data-i18n="settingsDescription">
+      Configure your transcription experience.
+     </p>
+    </div>
+    <section aria-label="More options" class="option-menu">
+     <button class="option-card" id="openTranscriptSettingsButton" type="button">
+      <span aria-hidden="true" class="option-card-icon optionSettingsIcon">
+       <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24">
+        <path d="M12 8.3a3.7 3.7 0 1 0 0 7.4 3.7 3.7 0 0 0 0-7.4Z">
+        </path>
+        <path d="m19 13.5 1.1.8-1.1 2-1.3-.5a7 7 0 0 1-1.5.9l-.2 1.4h-2.3l-.3-1.4a7 7 0 0 1-1.5-.9l-1.3.5-1.1-2 1.1-.8a6 6 0 0 1 0-1.8l-1.1-.8 1.1-2 1.3.5a7 7 0 0 1 1.5-.9l.3-1.4h2.3l.2 1.4a7 7 0 0 1 1.5.9l1.3-.5 1.1 2-1.1.8a6 6 0 0 1 0 1.8Z">
+        </path>
+       </svg>
+      </span>
+      <span class="option-card-copy">
+       <strong data-i18n="transcriptSettingsCard">
+        Transcription Settings
+       </strong>
+       <span data-i18n="transcriptSettingsDescription">
+        Provider, model, language and API keys
+       </span>
+      </span>
+      <svg aria-hidden="true" class="row-chevron" fill="none" viewbox="0 0 24 24">
+       <path d="m9 5 7 7-7 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+       </path>
+      </svg>
+     </button>
+     <button class="option-card" id="openAudioToolButton" type="button">
+      <span aria-hidden="true" class="option-card-icon optionAudioIcon">
+       <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24">
+        <path d="M6 3.5h8l4 4V20H6a2 2 0 0 1-2-2V5.5a2 2 0 0 1 2-2Z">
+        </path>
+        <path d="M14 4v4h4M8 14v2m4-5v5m4-8v8">
+        </path>
+       </svg>
+      </span>
+      <span class="option-card-copy">
+       <strong data-i18n="audioFileToText">
+        Audio File to Text
+       </strong>
+       <span data-i18n="audioFileHelp">
+        Convert an audio file to text
+       </span>
+      </span>
+      <svg aria-hidden="true" class="row-chevron" fill="none" viewbox="0 0 24 24">
+       <path d="m9 5 7 7-7 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+       </path>
+      </svg>
+     </button>
+     <button class="option-card" id="openHistoryButton" type="button">
+      <span aria-hidden="true" class="option-card-icon optionHistoryIcon">
+       <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24">
+        <path d="M3.5 12a8.5 8.5 0 1 0 2.2-5.7L3.5 8.5M3.5 4.5v4h4M12 7v5l3.5 2">
+        </path>
+       </svg>
+      </span>
+      <span class="option-card-copy">
+       <strong data-i18n="transcriptionHistoryCard">
+        Transcription History
+       </strong>
+       <span data-i18n="historyHelp">
+        View and manage past transcripts
+       </span>
+      </span>
+      <svg aria-hidden="true" class="row-chevron" fill="none" viewbox="0 0 24 24">
+       <path d="m9 5 7 7-7 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+       </path>
+      </svg>
+     </button>
+     <button class="option-card" id="openTextToolsButton" type="button">
+      <span aria-hidden="true" class="option-card-icon optionTextIcon">
+       <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24">
+        <path d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5">
+        </path>
+       </svg>
+      </span>
+      <span class="option-card-copy">
+       <strong data-i18n="textToolsTitle">
+        Text Tools
+       </strong>
+       <span data-i18n="textToolsDescription">
+        Copy, edit, insert, clear and export text
+       </span>
+      </span>
+      <svg aria-hidden="true" class="row-chevron" fill="none" viewbox="0 0 24 24">
+       <path d="m9 5 7 7-7 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+       </path>
+      </svg>
+     </button>
+     <button class="option-card" id="openPreferencesButton" type="button">
+      <span aria-hidden="true" class="option-card-icon optionPreferencesIcon">
+       <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24">
+        <path d="M4 6h16M4 12h16M4 18h16">
+        </path>
+        <circle cx="9" cy="6" r="2">
+        </circle>
+        <circle cx="15" cy="12" r="2">
+        </circle>
+        <circle cx="7" cy="18" r="2">
+        </circle>
+       </svg>
+      </span>
+      <span class="option-card-copy">
+       <strong data-i18n="recordingPreferencesTitle">
+        Recording &amp; Preferences
+       </strong>
+       <span data-i18n="recordingPreferencesDescription">
+        Theme, microphone access and recording behavior
+       </span>
+      </span>
+      <svg aria-hidden="true" class="row-chevron" fill="none" viewbox="0 0 24 24">
+       <path d="m9 5 7 7-7 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+       </path>
+      </svg>
+     </button>
+     <button class="option-card" id="openPrivacyButton" type="button">
+      <span aria-hidden="true" class="option-card-icon optionPrivacyIcon">
+       <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24">
+        <path d="M12 3 20 6v5.5c0 4.6-3.2 7.5-8 9.5-4.8-2-8-4.9-8-9.5V6l8-3Z">
+        </path>
+        <path d="m8.5 12 2.3 2.2 4.8-5">
+        </path>
+       </svg>
+      </span>
+      <span class="option-card-copy">
+       <strong data-i18n="privacyAboutTitle">
+        Privacy &amp; About
+       </strong>
+       <span data-i18n="privacyAboutDescription">
+        Permissions, online processing and app information
+       </span>
+      </span>
+      <svg aria-hidden="true" class="row-chevron" fill="none" viewbox="0 0 24 24">
+       <path d="m9 5 7 7-7 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+       </path>
+      </svg>
+     </button>
+    </section>
+    <p class="legal-note" data-i18n="providerPrivacy">
+     Audio is processed by the provider you choose. Review that provider's privacy and billing policies.
+    </p>
+   </main>
+   
+<!-- AUDIO FILE VIEW: Lets the user select an audio file and transcribe it. -->
+<main class="view" hidden="" id="audioView">
+    <div class="view-heading">
+     <button class="back-button" data-back-options="" type="button">
+      <svg aria-hidden="true" fill="none" viewbox="0 0 24 24">
+       <path d="m14.5 5-7 7 7 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+       </path>
+      </svg>
+      <span data-i18n="backToOptions">
+       Back to options
+      </span>
+     </button>
+     <h1 data-i18n="audioFileToText">
+      Audio File to Text
+     </h1>
+     <p data-i18n="audioFileHelpLong">
+      Choose an audio file and convert it to editable text.
+     </p>
+    </div>
+    <section class="settings-card">
+     <label class="file-dropzone" for="audioFileInput">
+      <span class="file-drop-icon">
+       <svg aria-hidden="true" fill="none" viewbox="0 0 24 24">
+        <path d="M12 16V4m-4 4 4-4 4 4M5 15v4h14v-4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+        </path>
+       </svg>
+      </span>
+      <strong data-i18n="chooseAudioFile">
+       Choose an audio file
+      </strong>
+      <span data-i18n="audioFileTypes">
+       WEBM, WAV, MP3, M4A, OGG, FLAC, AAC
+      </span>
+      <input accept="audio/*,.webm,.wav,.mp3,.m4a,.ogg,.flac,.aac,.mp4,.mpeg,.mpga" id="audioFileInput" type="file"/>
+     </label>
+     <p class="selected-file" data-i18n="noFileSelected" id="selectedFileName">
+      No file selected
+     </p>
+     <p class="inline-warning" data-i18n="audioFileOnlineWarning">
+      The selected audio file will be sent to your chosen provider only after you click Transcribe.
+     </p>
+     <p class="field-help" data-i18n="audioFileLimit">
+      For compatibility, select an audio file smaller than 18 MB.
+     </p>
+     <button class="button button-primary button-full" data-i18n="transcribeFile" disabled="" id="transcribeFileButton" type="button">
+      Transcribe audio file
+     </button>
+    </section>
+    <section class="settings-card">
+     <div class="section-heading">
+      <h2 data-i18n="fileTranscript">
+       File transcript
+      </h2>
+     </div>
+     <textarea class="transcript-input" data-i18n-placeholder="fileTranscriptPlaceholder" id="fileTranscriptText" placeholder="The file transcript will appear here..." rows="7"></textarea>
+     <div class="text-actions">
+      <button class="button button-secondary" data-i18n="copyText" id="copyFileTextButton" type="button">
+       Copy text
+      </button>
+      <button class="button button-quiet" data-i18n="downloadTxt" id="downloadFileTextButton" type="button">
+       Download TXT
+      </button>
+     </div>
+    </section>
+   </main>
+   
+<!-- HISTORY VIEW: Displays saved transcript records. -->
+<main class="view" hidden="" id="historyView">
+    <div class="view-heading">
+     <button class="back-button" data-back-options="" type="button">
+      <svg aria-hidden="true" fill="none" viewbox="0 0 24 24">
+       <path d="m14.5 5-7 7 7 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+       </path>
+      </svg>
+      <span data-i18n="backToOptions">
+       Back to options
+      </span>
+     </button>
+     <h1 data-i18n="history">
+      History
+     </h1>
+     <p data-i18n="historyLongHelp">
+      Your transcript history stays in this Chrome profile.
+     </p>
+    </div>
+    <div class="history-list" id="historyList">
+    </div>
+    <button class="button button-quiet button-full" data-i18n="clearHistory" id="clearHistoryButton" type="button">
+     Clear all history
+    </button>
+   </main>
+   
+<!-- SETTINGS VIEW: Stores provider, model, API key, and language choices. -->
+<main class="view" hidden="" id="settingsView">
+    <div class="view-heading">
+     <button class="back-button" data-back-options="" type="button">
+      <svg aria-hidden="true" fill="none" viewbox="0 0 24 24">
+       <path d="m14.5 5-7 7 7 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+       </path>
+      </svg>
+      <span data-i18n="backToOptions">
+       Back to options
+      </span>
+     </button>
+     <h1 data-i18n="transcriptSettingsCard">
+      Transcription Settings
+     </h1>
+     <p data-i18n="transcriptSettingsDescription">
+      Provider, model, language and API keys.
+     </p>
+    </div>
+    <section class="settings-card">
+     <div class="settings-heading">
+      <span class="settings-icon">
+       <svg aria-hidden="true" fill="none" viewbox="0 0 24 24">
+        <path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6 2.1 2.1m0-12.8-2.1 2.1m-8.6 8.6-2.1 2.1" stroke="currentColor" stroke-linecap="round" stroke-width="1.7">
+        </path>
+        <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7">
+        </circle>
+       </svg>
+      </span>
+      <div>
+       <h2 data-i18n="providerSettings">
+        Provider and model
+       </h2>
+       <p data-i18n="providerSettingsHelp">
+        Choose where your audio is transcribed.
+       </p>
+      </div>
+     </div>
+     <label class="field-label" data-i18n="provider" for="providerSelect">
+      Provider
+     </label>
+     <select class="form-control" id="providerSelect">
+      <option value="groq">
+       Groq
+      </option>
+      <option value="gemini">
+       Google Gemini
+      </option>
+      <option value="openrouter">
+       OpenRouter
+      </option>
+     </select>
+     <label class="field-label" data-i18n="model" for="modelSelect">
+      Model
+     </label>
+     <select class="form-control" id="modelSelect">
+     </select>
+     <p class="field-help" data-i18n="modelHelp" id="modelHelp">
+      Choose a model supported by the selected provider.
+     </p>
+     <p aria-live="polite" class="provider-cost-note" data-i18n="groqFreeNote" id="providerCostNote">
+      Groq's free plan has usage limits. Limits can change.
+     </p>
+     <label class="metered-consent-row" for="allowOpenRouterChargesCheckbox" hidden="" id="openRouterCostConsentRow">
+      <input id="allowOpenRouterChargesCheckbox" type="checkbox"/>
+      <span data-i18n="openRouterCostConsent">
+       I understand OpenRouter transcription may incur usage charges.
+      </span>
+     </label>
+     <button class="button button-secondary button-full" data-i18n="testConnection" id="testConnectionButton" type="button">
+      Test API connection
+     </button>
+    </section>
+    <section class="settings-card api-keys-card">
+     <div class="settings-heading">
+      <span aria-hidden="true" class="settings-icon">
+       <svg fill="none" viewbox="0 0 24 24">
+        <rect height="11" rx="2" stroke="currentColor" stroke-width="1.7" width="16" x="4" y="10">
+        </rect>
+        <path d="M8 10V7a4 4 0 1 1 8 0v3" stroke="currentColor" stroke-linecap="round" stroke-width="1.7">
+        </path>
+       </svg>
+      </span>
+      <div>
+       <h2 data-i18n="apiKeysTitle">
+        Provider API keys
+       </h2>
+       <p data-i18n="apiKeysDescription">
+        Save each provider's key separately. Keys remain hidden after saving.
+       </p>
+      </div>
+     </div>
+     <div class="provider-key-block" data-provider-key="groq">
+      <label class="field-label" data-i18n="groqKeyLabel" for="groqApiKeyInput">
+       Groq API key
+      </label>
+      <div class="api-key-input-row">
+       <input autocomplete="off" class="form-control provider-key-input" data-i18n-placeholder="apiKeyPlaceholder" id="groqApiKeyInput" placeholder="Paste API key here" spellcheck="false" type="password"/>
+       <button aria-pressed="false" class="button button-secondary button-small" data-i18n="showKey" id="toggleGroqKeyButton" type="button">
+        Show
+       </button>
+      </div>
+      <div class="field-actions">
+       <button class="button button-primary" data-i18n="saveApiKey" id="saveGroqKeyButton" type="button">
+        Save key
+       </button>
+       <button class="button button-secondary" data-i18n="removeKey" id="clearGroqKeyButton" type="button">
+        Remove key
+       </button>
+      </div>
+      <p aria-live="polite" class="field-help key-status" data-i18n="keyNotConfigured" id="groqKeyStatus">
+       No key configured for this provider.
+      </p>
+     </div>
+     <div class="provider-key-block" data-provider-key="gemini">
+      <label class="field-label" data-i18n="geminiKeyLabel" for="geminiApiKeyInput">
+       Google Gemini API key
+      </label>
+      <div class="api-key-input-row">
+       <input autocomplete="off" class="form-control provider-key-input" data-i18n-placeholder="apiKeyPlaceholder" id="geminiApiKeyInput" placeholder="Paste API key here" spellcheck="false" type="password"/>
+       <button aria-pressed="false" class="button button-secondary button-small" data-i18n="showKey" id="toggleGeminiKeyButton" type="button">
+        Show
+       </button>
+      </div>
+      <div class="field-actions">
+       <button class="button button-primary" data-i18n="saveApiKey" id="saveGeminiKeyButton" type="button">
+        Save key
+       </button>
+       <button class="button button-secondary" data-i18n="removeKey" id="clearGeminiKeyButton" type="button">
+        Remove key
+       </button>
+      </div>
+      <p aria-live="polite" class="field-help key-status" data-i18n="keyNotConfigured" id="geminiKeyStatus">
+       No key configured for this provider.
+      </p>
+     </div>
+     <div class="provider-key-block" data-provider-key="openrouter">
+      <label class="field-label" data-i18n="openrouterKeyLabel" for="openrouterApiKeyInput">
+       OpenRouter API key
+      </label>
+      <div class="api-key-input-row">
+       <input autocomplete="off" class="form-control provider-key-input" data-i18n-placeholder="apiKeyPlaceholder" id="openrouterApiKeyInput" placeholder="Paste API key here" spellcheck="false" type="password"/>
+       <button aria-pressed="false" class="button button-secondary button-small" data-i18n="showKey" id="toggleOpenrouterKeyButton" type="button">
+        Show
+       </button>
+      </div>
+      <div class="field-actions">
+       <button class="button button-primary" data-i18n="saveApiKey" id="saveOpenrouterKeyButton" type="button">
+        Save key
+       </button>
+       <button class="button button-secondary" data-i18n="removeKey" id="clearOpenrouterKeyButton" type="button">
+        Remove key
+       </button>
+      </div>
+      <p aria-live="polite" class="field-help key-status" data-i18n="keyNotConfigured" id="openrouterKeyStatus">
+       No key configured for this provider.
+      </p>
+     </div>
+     <p class="security-note" data-i18n="apiSecurityNote">
+      Keys are stored in your Chrome profile. A browser extension cannot make client-side keys completely secret. Do not share your extension folder if it contains your real keys.
+     </p>
+    </section>
+    <section class="settings-card">
+     <div class="settings-heading">
+      <span class="settings-icon">
+       <svg aria-hidden="true" fill="none" viewbox="0 0 24 24">
+        <path d="M4 5h16M4 12h16M4 19h16" stroke="currentColor" stroke-linecap="round" stroke-width="1.7">
+        </path>
+        <circle cx="9" cy="5" fill="var(--surface)" r="2" stroke="currentColor" stroke-width="1.7">
+        </circle>
+        <circle cx="15" cy="12" fill="var(--surface)" r="2" stroke="currentColor" stroke-width="1.7">
+        </circle>
+        <circle cx="7" cy="19" fill="var(--surface)" r="2" stroke="currentColor" stroke-width="1.7">
+        </circle>
+       </svg>
+      </span>
+      <div>
+       <h2 data-i18n="languageSettings">
+        Language and direction
+       </h2>
+       <p data-i18n="languageSettingsHelp">
+        Text direction follows the selected language.
+       </p>
+      </div>
+     </div>
+     <label class="field-label" data-i18n="dictationLanguage" for="dictationLanguageSelect">
+      Dictation language
+     </label>
+     <select class="form-control" id="dictationLanguageSelect">
+      <option data-i18n="autoDetect" value="auto">
+       Auto-detect
+      </option>
+      <option value="en">
+       English
+      </option>
+      <option value="fa">
+       Persian / Dari
+      </option>
+      <option value="ps">
+       Pashto
+      </option>
+      <option value="ar">
+       Arabic
+      </option>
+      <option value="ur">
+       Urdu
+      </option>
+      <option value="hi">
+       Hindi
+      </option>
+      <option value="es">
+       Spanish
+      </option>
+      <option value="fr">
+       French
+      </option>
+      <option value="de">
+       German
+      </option>
+      <option value="it">
+       Italian
+      </option>
+      <option value="pt">
+       Portuguese
+      </option>
+      <option value="ru">
+       Russian
+      </option>
+      <option value="tr">
+       Turkish
+      </option>
+      <option value="zh">
+       Chinese
+      </option>
+      <option value="ja">
+       Japanese
+      </option>
+      <option value="ko">
+       Korean
+      </option>
+      <option value="id">
+       Indonesian
+      </option>
+      <option value="bn">
+       Bengali
+      </option>
+      <option value="nl">
+       Dutch
+      </option>
+      <option value="pl">
+       Polish
+      </option>
+      <option value="uk">
+       Ukrainian
+      </option>
+      <option value="vi">
+       Vietnamese
+      </option>
+      <option value="th">
+       Thai
+      </option>
+      <option value="ms">
+       Malay
+      </option>
+      <option value="sw">
+       Swahili
+      </option>
+      <option value="el">
+       Greek
+      </option>
+      <option value="he">
+       Hebrew
+      </option>
+      <option value="ro">
+       Romanian
+      </option>
+      <option value="hu">
+       Hungarian
+      </option>
+      <option value="cs">
+       Czech
+      </option>
+      <option value="sv">
+       Swedish
+      </option>
+      <option value="da">
+       Danish
+      </option>
+      <option value="fi">
+       Finnish
+      </option>
+      <option value="no">
+       Norwegian
+      </option>
+      <option value="ta">
+       Tamil
+      </option>
+      <option value="te">
+       Telugu
+      </option>
+      <option value="mr">
+       Marathi
+      </option>
+      <option value="az">
+       Azerbaijani
+      </option>
+      <option value="uz">
+       Uzbek
+      </option>
+      <option value="kk">
+       Kazakh
+      </option>
+      <option value="fil">
+       Filipino
+      </option>
+     </select>
+     <label class="field-label" data-i18n="interfaceLanguage" for="interfaceLanguageSelect">
+      Interface language
+     </label>
+     <select class="form-control" id="interfaceLanguageSelect">
+      <option value="en">
+       English
+      </option>
+      <option value="fa">
+       دری / فارسی
+      </option>
+      <option value="ps">
+       پښتو
+      </option>
+      <option value="ar">
+       العربية
+      </option>
+      <option value="ur">
+       اردو
+      </option>
+     </select>
+     <p class="field-help" data-i18n="directionHelp">
+      Right-to-left languages use right-aligned text and a mirrored layout where appropriate.
+     </p>
+    </section>
+   </main>
+   
+<!-- TEXT TOOLS VIEW: Provides actions for the current transcript. -->
+<main class="view" hidden="" id="textToolsView">
+    <div class="view-heading">
+     <button class="back-button" data-back-options="" type="button">
+      <svg aria-hidden="true" fill="none" viewbox="0 0 24 24">
+       <path d="m14.5 5-7 7 7 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+       </path>
+      </svg>
+      <span data-i18n="backToOptions">
+       Back to options
+      </span>
+     </button>
+     <h1 data-i18n="textToolsTitle">
+      Text Tools
+     </h1>
+     <p data-i18n="textToolsDescription">
+      Copy, edit, insert, clear and export text.
+     </p>
+    </div>
+    <section class="tools-card">
+     <button class="tool-row" id="downloadTextButton" type="button">
+      <span class="tool-row-icon">
+       <svg aria-hidden="true" fill="none" viewbox="0 0 24 24">
+        <path d="M12 3v11m-4-4 4 4 4-4M5 17v3h14v-3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7">
+        </path>
+       </svg>
+      </span>
+      <span class="tool-row-copy">
+       <strong data-i18n="downloadTxt">
+        Download TXT
+       </strong>
+       <span data-i18n="downloadTxtHelp">
+        Save the current transcript as a text file.
+       </span>
+      </span>
+      <svg aria-hidden="true" class="row-chevron" fill="none" viewbox="0 0 24 24">
+       <path d="m9 5 7 7-7 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+       </path>
+      </svg>
+     </button>
+     <button class="tool-row" id="insertTextButton" type="button">
+      <span class="tool-row-icon">
+       <svg aria-hidden="true" fill="none" viewbox="0 0 24 24">
+        <path d="M4 5h16v14H4zM8 9h8M8 12h5m3 3 2 2 4-4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7">
+        </path>
+       </svg>
+      </span>
+      <span class="tool-row-copy">
+       <strong data-i18n="insertText">
+        Insert into webpage
+       </strong>
+       <span data-i18n="insertTextHelp">
+        Send the text to a compatible focused field.
+       </span>
+      </span>
+      <svg aria-hidden="true" class="row-chevron" fill="none" viewbox="0 0 24 24">
+       <path d="m9 5 7 7-7 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+       </path>
+      </svg>
+     </button>
+     <button class="tool-row" id="clearTextButton" type="button">
+      <span class="tool-row-icon">
+       <svg aria-hidden="true" fill="none" viewbox="0 0 24 24">
+        <path d="M4 7h16M9 7V4h6v3m-8 0 1 13h8l1-13M10 10v7m4-7v7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7">
+        </path>
+       </svg>
+      </span>
+      <span class="tool-row-copy">
+       <strong data-i18n="clear">
+        Clear text
+       </strong>
+       <span data-i18n="clearTextHelp">
+        Remove the current transcript from the editor.
+       </span>
+      </span>
+      <svg aria-hidden="true" class="row-chevron" fill="none" viewbox="0 0 24 24">
+       <path d="m9 5 7 7-7 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+       </path>
+      </svg>
+     </button>
+     <button class="tool-row" id="copyToolsTextButton" type="button">
+      <span aria-hidden="true" class="tool-row-icon">
+       <svg fill="none" viewbox="0 0 24 24">
+        <rect height="12" rx="2" stroke="currentColor" stroke-width="1.7" width="11" x="8" y="8">
+        </rect>
+        <path d="M15 8V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h2" stroke="currentColor" stroke-width="1.7">
+        </path>
+       </svg>
+      </span>
+      <span class="tool-row-copy">
+       <strong data-i18n="copyText">
+        Copy text
+       </strong>
+       <span data-i18n="copyToolsDescription">
+        Copy the current transcript to the clipboard.
+       </span>
+      </span>
+      <svg aria-hidden="true" class="row-chevron" fill="none" viewbox="0 0 24 24">
+       <path d="m9 5 7 7-7 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+       </path>
+      </svg>
+     </button>
+     <p class="field-help text-tools-stats" id="textToolsStats">
+      0 words · 0 characters
+     </p>
+    </section>
+   </main>
+   
+<!-- PREFERENCES VIEW: Contains appearance and recording preferences. -->
+<main class="view" hidden="" id="preferencesView">
+    <div class="view-heading">
+     <button class="back-button" data-back-options="" type="button">
+      <svg aria-hidden="true" fill="none" viewbox="0 0 24 24">
+       <path d="m14.5 5-7 7 7 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+       </path>
+      </svg>
+      <span data-i18n="backToOptions">
+       Back to options
+      </span>
+     </button>
+     <h1 data-i18n="recordingPreferencesTitle">
+      Recording &amp; Preferences
+     </h1>
+     <p data-i18n="recordingPreferencesDescription">
+      Theme, microphone access and recording behavior.
+     </p>
+    </div>
+    <section class="settings-card">
+     <div class="settings-heading">
+      <span aria-hidden="true" class="settings-icon">
+       ☼
+      </span>
+      <div>
+       <h2 data-i18n="appearanceTitle">
+        Appearance
+       </h2>
+       <p data-i18n="appearanceDescription">
+        Switch between the dark and light color themes.
+       </p>
+      </div>
+     </div>
+     <button class="button button-secondary button-full" data-i18n="changeTheme" id="preferencesThemeButton" type="button">
+      Change theme
+     </button>
+    </section>
+    <section class="settings-card">
+     <div class="settings-heading">
+      <span aria-hidden="true" class="settings-icon">
+       ♩
+      </span>
+      <div>
+       <h2 data-i18n="microphonePreferencesTitle">
+        Microphone access
+       </h2>
+       <p data-i18n="microphonePreferencesDescription">
+        Check or request microphone access. This does not send audio online.
+       </p>
+      </div>
+     </div>
+     <button class="button button-secondary button-full" data-i18n="enableMic" id="preferencesMicrophoneButton" type="button">
+      Enable microphone
+     </button>
+    </section>
+    <section class="settings-card">
+     <h2 data-i18n="recordingBehaviorTitle">
+      Recording behavior
+     </h2>
+     <p class="field-help" data-i18n="recordingBehaviorDescription">
+      Natural speech pauses create transcription segments. The Pause button stops microphone capture until you resume. Stop ends the session and releases microphone access.
+     </p>
+     <p class="field-help" data-i18n="onlineModePreferenceDescription">
+      Online Voice Typing is disabled on a fresh install. Microphone permission alone never permits audio uploads.
+     </p>
+    </section>
+   </main>
+   
+<!-- PRIVACY AND ABOUT VIEW: Explains privacy, setup, and NR Company information. -->
+<main class="view" hidden="" id="privacyView">
+    <div class="view-heading">
+     <button class="back-button" data-back-options="" type="button">
+      <svg aria-hidden="true" fill="none" viewbox="0 0 24 24">
+       <path d="m14.5 5-7 7 7 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+       </path>
+      </svg>
+      <span data-i18n="backToOptions">
+       Back to options
+      </span>
+     </button>
+     <h1 data-i18n="privacyAboutTitle">
+      Privacy &amp; About
+     </h1>
+     <p data-i18n="privacyAboutDescription">
+      Permissions, online processing and app information.
+     </p>
+    </div>
+    <section class="settings-card privacy-content">
+     <h2>
+      Quick start — how to use
+     </h2>
+     <ol class="nr-quickstart">
+      <li>
+       Open
+       <strong>
+        More Options → Transcription Settings
+       </strong>
+       and choose a supported provider.
+      </li>
+      <li>
+       Paste your own API key into that provider's field and save it. Never use a key shared by someone else.
+      </li>
+      <li>
+       Return to the home screen and select
+       <strong>
+        Enable microphone
+       </strong>
+       . Allow access in Chrome when prompted.
+      </li>
+      <li>
+       Turn on
+       <strong>
+        Online Voice Typing
+       </strong>
+       . This is separate from microphone permission and means audio may be sent to the selected provider.
+      </li>
+      <li>
+       Press
+       <strong>
+        Start recording
+       </strong>
+       , speak naturally, and pause briefly between phrases. Use Pause/Resume as needed and press Stop when finished.
+      </li>
+      <li>
+       Use Copy or Export to save your transcript. Your transcript history stays in this browser profile unless you choose to share or export it.
+      </li>
+     </ol>
+     <p>
+      <strong>
+       Installation help:
+      </strong>
+      For a new installation, extract the downloaded ZIP, open
+      <code>
+       chrome://extensions
+      </code>
+      , enable Developer mode, click Load unpacked, and select the folder containing
+      <code>
+       manifest.json
+      </code>
+      .
+     </p>
+     <p>
+      <strong>
+       Important:
+      </strong>
+      This extension requires an online transcription provider. Free quotas are not guaranteed, and a provider may be unavailable on some networks. If a provider is blocked, the extension cannot bypass that network restriction.
+     </p>
+     <h2 data-i18n="privacyAudioTitle">
+      Audio and online processing
+     </h2>
+     <p data-i18n="privacyAudioDescription">
+      Audio is sent only when Online Voice Typing is enabled and an intended transcription action is running. Already submitted provider requests may finish after the toggle is turned off.
+     </p>
+     <h2 data-i18n="privacyKeysTitle">
+      API key handling
+     </h2>
+     <p data-i18n="privacyKeysDescription">
+      API keys are stored in Chrome local storage on this browser profile. An extension that calls providers directly cannot guarantee key secrecy from someone who can inspect the profile or extension. Never share keys or the configured profile.
+     </p>
+     <h2 data-i18n="privacyStorageTitle">
+      Local storage
+     </h2>
+     <p data-i18n="privacyStorageDescription">
+      Transcript history is stored locally and limited to the latest 20 records. Raw audio is not saved as history by default. You can delete individual records or clear the history.
+     </p>
+     <h2 data-i18n="privacyPermissionsTitle">
+      Permissions
+     </h2>
+     <p data-i18n="privacyPermissionsDescription">
+      The sidePanel permission opens the side panel; storage keeps settings and transcript history; activeTab and scripting support user-requested text insertion; clipboardWrite supports copy actions. Provider host permissions allow only the listed transcription API domains.
+     </p>
+     <h2 data-i18n="aboutVoiceFlowTitle">
+      About Online Voice Typing
+     </h2>
+     <p data-i18n="aboutVoiceFlowDescription">
+      Online Voice Typing is a Chrome extension for turning speech into text through a user-selected online transcription provider. It does not include an offline AI model. Provider availability, data handling, quotas, and pricing may change.
+     </p>
+     <section aria-labelledby="nrCompanyHeading" class="nr-about-block">
+      <div class="nr-company-heading">
+       <span aria-hidden="true" class="nr-monogram">
+        NR
+       </span>
+       <div>
+        <h2 id="nrCompanyHeading">
+         NR Company
+        </h2>
+        <p class="nr-tagline">
+         Software, web and AI solutions
+        </p>
+       </div>
+      </div>
+      <p>
+       <strong>
+        NR Company
+       </strong>
+       (full name:
+       <strong>
+        Nooraqa Rasouli Company
+       </strong>
+       ) is a planned software technology company founded in Kabul, Afghanistan, in 2025 by
+       <strong>
+        Nooraqa Rasouli
+       </strong>
+       . The company profile is included as a forward-looking brand identity; company details and services may evolve as the business is formally established.
+      </p>
+      <h3>
+       What we work on
+      </h3>
+      <ul class="nr-project-list">
+       <li>
+        <strong>
+         Websites and web systems
+        </strong>
+        <span>
+         Design and development of websites and practical browser-based systems for organizations and users.
+        </span>
+       </li>
+       <li>
+        <strong>
+         Desktop applications
+        </strong>
+        <span>
+         Useful desktop software designed around real workflows and local needs.
+        </span>
+       </li>
+       <li>
+        <strong>
+         AI applications and models
+        </strong>
+        <span>
+         Applications using local AI models that run on a user's own machine, and online AI models accessed through cloud services.
+        </span>
+       </li>
+       <li>
+        <strong>
+         Browser extensions
+        </strong>
+        <span>
+         Online Voice Typing converts speech to text using online transcription APIs. Offline Voice Typing is a separate project intended for local speech recognition where supported.
+        </span>
+       </li>
+       <li>
+        <strong>
+         Attendance Management System
+        </strong>
+        <span>
+         A planned system for managing attendance records and reviewing attendance by student, teacher, class, or subject, according to configured roles.
+        </span>
+       </li>
+       <li>
+        <strong>
+         Smart Learning Platform
+        </strong>
+        <span>
+         A planned learning platform to organize learning materials, learning activities, and communication between learners and educators.
+        </span>
+       </li>
+       <li>
+        <strong>
+         Library Management System
+        </strong>
+        <span>
+         A planned system to organize books and other resources, track lending and returns, and manage library records.
+        </span>
+       </li>
+      </ul>
+      <h3>
+       About me — Nooraqa Rasouli
+      </h3>
+      <p>
+       I am Nooraqa Rasouli, the founder behind the NR Company concept. My focus is on building practical software, web applications, browser extensions, and AI-powered tools that make everyday tasks easier. This section is part of the product's fixed information page and is not editable from the extension interface.
+      </p>
+      
+<!-- CONTACT DETAILS: Edit the visible contact information below manually before publishing. Replace the placeholder lines with your official email, website, and social links. Do not add private personal information. -->
+      <div class="nr-contact-block">
+       <h3>
+        Contact
+       </h3>
+       <p>
+        Official contact details will be added here by NR Company.
+       </p>
+       <p>
+        Email:
+        <span>
+         ADD_OFFICIAL_EMAIL_HERE
+        </span>
+       </p>
+       <p>
+        Website:
+        <span>
+         ADD_OFFICIAL_WEBSITE_HERE
+        </span>
+       </p>
+       <p>
+        Social profile:
+        <span>
+         ADD_OFFICIAL_PROFILE_HERE
+        </span>
+       </p>
+      </div>
+     </section>
+    </section>
+   </main>
+   <div aria-live="polite" class="toast" id="toast" role="status">
+   </div>
+  </div>
+  <script src="js/i18n.js">
+  </script>
+  <script src="js/storage.js">
+  </script>
+  <script src="js/providers.js">
+  </script>
+  <script src="js/recorder.js">
+  </script>
+  <script src="js/sidepanel.js">
+  </script>
+ </body>
+</html>

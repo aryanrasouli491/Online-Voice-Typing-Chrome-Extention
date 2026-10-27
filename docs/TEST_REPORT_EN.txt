@@ -1,0 +1,72 @@
+VoiceFlow Online v2.0.0 — Test and Verification Report
+======================================================
+Date: 2026-10-15
+
+Important limitation
+--------------------
+Checks were run against the source folder using syntax/static validation, a browser UI smoke test with a test-only mocked Chrome API, and Node tests with mocked provider endpoints and mocked MediaRecorder/audio streams. This environment did not run the packaged extension in a normal installed Chrome extension context with a physical microphone, actual API credentials, or live provider requests. The report does not claim those real-world tests passed.
+
+Passed checks
+-------------
+1. JavaScript syntax: all shipped JavaScript source files passed `node --check`.
+2. Manifest: manifest.json parses as JSON, uses Manifest V3, points to an existing service worker and side panel, and references existing icon assets.
+3. HTML: duplicate IDs and missing local resource references were checked; the current side panel has eight separate view destinations.
+4. CSS: source stylesheets were parsed for syntax errors with an available CSS parser.
+5. UI smoke test (mock Chrome API):
+   - Home view appears first.
+   - Online Voice Typing is off by default.
+   - Theme toggle works.
+   - Six More Options cards navigate to their dedicated destinations and return controls.
+   - Provider-key mismatch warning is shown without automatic provider switching.
+   - Mock key-save flow works.
+   - Changing dictation language does not force the whole interface to RTL.
+   - RTL transcript direction and character counter update.
+   - No browser console errors were recorded during the tested actions.
+6. Recorder lifecycle test (mock MediaRecorder/stream): Start, Pause, Resume, Stop, Stop while paused, resource cleanup, and session completion passed.
+7. Provider-request tests (mock fetch only):
+   - Groq multipart transcription request and response parsing.
+   - OpenRouter audio-transcription request body and response parsing.
+   - Gemini file upload, Interactions transcription request, and best-effort DELETE cleanup sequence.
+   - Provider connection-test URLs and call flow.
+8. Security/source scans: checked for real-looking API keys, unsafe dynamic code (`eval` / `new Function`), remote script loading, and references to a runtime Python dependency.
+9. History normalization: out-of-range timestamps are rejected to prevent invalid Date rendering.
+10. ZIP packaging: archive integrity, manifest-at-root layout, and source/archive file consistency were checked after packaging.
+
+Code changes included
+---------------------
+- Reorganized More Options into six subviews in the reference design's visual language.
+- Added separate provider-key settings and key-prefix mismatch warnings.
+- Added explicit Pause/Resume controls and a stateful recording lifecycle, including Stop while paused and microphone-track cleanup.
+- Kept Online Voice Typing off by default and made the explicit upload-consent flow separate from microphone permission.
+- Kept interface language direction separate from transcript direction.
+- Added dedicated permission-state copy and improvements to provider/audio request handling.
+- Bounded and validated local history, including date-range checks.
+- Updated English/Dari documentation and security notes.
+- Excluded personal key configuration from the distributed package.
+
+Not verified in this environment
+--------------------------------
+- Loading the packaged extension through chrome://extensions in normal desktop Chrome.
+- Real Chrome microphone permission decisions and OS-level microphone behavior.
+- Actual physical microphone recording quality, silence boundaries, and timing under real browser scheduling.
+- Live transcription through Groq, Google Gemini, or OpenRouter using the user's accounts/keys.
+- Current account-specific free quota, billing status, model access, file-size limits, or language accuracy.
+- Direct text insertion behavior across arbitrary real websites and Chrome-protected pages.
+- Real-world recognition quality for Dari, Persian, Pashto, Arabic, Urdu, and mixed-language speech.
+- Independent penetration testing or a formal privacy/security audit.
+
+Recommended manual acceptance test
+----------------------------------
+1. Install the extracted package via chrome://extensions > Developer mode > Load unpacked.
+2. Confirm home opens first and Online Voice Typing remains off until enabled.
+3. Enable Online Voice Typing, grant microphone access, and test Start/Pause/Resume/Stop while checking that the microphone indicator turns off after Stop.
+4. With a test account and a short non-sensitive audio sample, verify each provider individually. Review provider billing/quota first; do not assume free service.
+5. Try a small audio file, history save/restore/delete, TXT export, a normal editable webpage insertion target, and Dari interface/transcript direction.
+6. Check Chrome extension errors, the provider account dashboard, and final transcript accuracy.
+
+
+## Follow-up patch checks (2026-10-18)
+- JavaScript syntax checks passed for recorder.js, sidepanel.js, and i18n.js.
+- The mute control is wired to MediaStreamTrack.enabled and keeps its preference through a pause/resume cycle; it resets when a new session begins. Static inspection only; physical microphone behavior was not tested here.
+- New recording clears only the main transcript editor after preflight checks succeed; saved history is not deleted.
+- Full installed-Chrome and live-provider testing remains unverified.

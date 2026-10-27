@@ -1,0 +1,40 @@
+VoiceFlow Online v2.0.0 — Security Review Summary
+=================================================
+
+Review scope
+------------
+This is a practical source-code review, not a formal security certification or penetration test. It reviewed the Manifest V3 permissions, provider requests, API-key handling, transcript rendering, local storage, recorder lifecycle, consent controls, and distributed package.
+
+Findings addressed
+------------------
+- Distribution risk: the original project included config/apikey.local.js even though the values were blank. The file is omitted from the release, and a blank, non-runtime example remains.
+- Consent separation: microphone permission is distinct from upload consent. Online Voice Typing is off by default, and transcription does not start when it is disabled.
+- Cost control: OpenRouter transcription requires an explicit metered-use acknowledgement, defaulting off.
+- Provider routing: each provider has a separate key field. Prefix mismatch produces a local warning only; it does not redirect or transmit the key.
+- Endpoint safety: provider calls use fixed official HTTPS endpoints; keys are passed in request headers rather than URL query parameters.
+- Permissions: host access remains limited to Groq, Google Generative Language, and OpenRouter; no broad <all_urls> permission was added.
+- Code execution: scan found no eval(), new Function(), remote script sources, or external CDN JavaScript in the extension source.
+- Transcript safety: transcript, history, and provider response text are inserted as text, not trusted HTML.
+- Storage resilience: stored options are normalized; history count/text is bounded; invalid Date timestamps are rejected.
+- Recording lifecycle: Stop waits for MediaRecorder completion, the final data event is collected before the segment callback, and microphone tracks are released after Stop/Pause.
+- Temporary remote file: Gemini uploaded-file deletion is attempted after the transcription request, but it is best-effort only.
+
+Permissions retained
+--------------------
+- sidePanel — open the Chrome side panel.
+- storage — retain local options, API keys, permission status, and transcript history.
+- activeTab and scripting — perform user-invoked transcript insertion where the active page permits it.
+- clipboardWrite — Copy action and clipboard fallback.
+- Host permissions — call the three configured official provider domains only.
+
+Remaining risks
+---------------
+- API keys in chrome.storage.local are not secrets protected by a dedicated vault. A person who can inspect the Chrome profile or extension runtime may retrieve them.
+- Audio and prompts sent to providers are processed under provider terms; HTTPS protects transport, not provider-side retention.
+- Gemini file deletion may fail or be delayed.
+- An unreviewed extension update, compromised developer machine, malicious installed extension, or browser/profile access can change the threat model.
+- No live provider call, installed-extension testing, formal penetration test, or independent code audit was performed in this environment.
+
+Recommendation
+--------------
+Install only from a trusted copy, keep Chrome updated, use dedicated/restricted API keys when available, set provider spending limits where offered, never share a Chrome profile containing keys, and rotate any key that may have been exposed. Review the provider terms, pricing, and quotas before submitting sensitive audio.

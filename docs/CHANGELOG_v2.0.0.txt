@@ -1,0 +1,76 @@
+VoiceFlow Online v2.0.0 — Change Log and Bug-Fix Report
+======================================================
+
+Overview
+--------
+Version 2.0.0 is based on the supplied VoiceFlow Online v1.1.3 source and the user's reference screenshot. The implementation stays a standalone Manifest V3 extension using HTML, CSS, vanilla JavaScript, and Chrome APIs. The original ZIP was not overwritten.
+
+Changed existing files
+----------------------
+- manifest.json
+  Version advanced to 2.0.0; description updated. Existing permissions remain narrow: sidePanel, storage, activeTab, scripting, clipboardWrite, and only the three provider host domains.
+- sidepanel.html
+  Home controls include explicit Pause/Resume and Stop, a compact transcript counter, and the existing online consent control. More Options now navigates to dedicated settings, audio-file, history, text-tools, preferences, and privacy/about views. Three separate API key cards/fields were added.
+- css/sidepanel.css
+  Compact responsive styling was improved for the supplied dark/light identity, More Options cards, dedicated subpages, provider key rows, recording controls, permission states, counters, and smaller panel sizes.
+- js/sidepanel.js
+  Added separate navigation destinations, provider-specific key management, prefix mismatch warnings, model re-rendering on provider switch, connection testing, explicit OpenRouter metered-use acknowledgement, theme/language controls, permission status messaging, transcript/history actions, and recording coordination. Startup now validates provider configuration and cost acknowledgement before opening the microphone permission workflow, re-checks online consent after asynchronous steps, and guards duplicate start requests.
+- js/recorder.js
+  Uses an explicit recording state machine. Adds real Pause/Resume behavior by stopping capture during Pause and reacquiring the microphone on Resume; handles Stop while paused; waits for final dataavailable/stop events; releases streams and audio-analysis resources; queues completed speech segments after natural silence.
+- js/providers.js
+  Keeps distinct request formats for Groq, Gemini, and OpenRouter; sets model choices; adds timeouts, safer bounded error messages, MIME/format handling, API connection checks, and Gemini temporary-file cleanup attempts.
+- js/storage.js
+  Defaults online sending and OpenRouter paid/metered use to off; normalizes allowed settings, API-key fields, and bounded transcript history; rejects invalid/out-of-range timestamps.
+- js/background.js
+  Validates extension message origin/path more robustly when the sender URL contains query parameters.
+- js/i18n.js
+  Adds/updates interface strings for the six subpages, key-field messages, recording controls, privacy, counts, and RTL locales (English, Dari/Persian, Pashto, Arabic, Urdu).
+- js/microphone-permission.js
+  Improves permission-page labels and language handling for the supported RTL languages.
+- README.md and README_FA.txt
+  Rewritten installation, usage, provider limitations, language direction, permission and privacy explanations, troubleshooting, source map, and honest testing status.
+- config/apikey.local.example.js
+  Remains only as a blank non-runtime example; no personal API keys are present.
+
+Removed from distribution
+-------------------------
+- config/apikey.local.js
+  Removed from the release package. API keys should be entered in the extension settings. Any key previously stored in a local source file should be kept outside shared builds and rotated if exposed.
+- Stale root-level privacy/test reports were replaced by versioned documentation under docs/.
+
+Bug fixes / behavior corrections
+--------------------------------
+1. Manual Pause/Resume was missing in the supplied source; controls and recorder state transitions have been added.
+2. Stop while paused could leave the recording UI/state inconsistent; the state-machine stop path now finalizes a paused session and releases resources.
+3. Recording startup could proceed based on microphone access alone; now the online-transcription toggle, provider key, and OpenRouter metered-use acknowledgement are checked.
+4. Rapid repeated start clicks could create overlapping startup requests; a start-in-progress guard prevents duplicate start flows.
+5. Interface direction could be affected by the selected dictation language; UI language and transcript direction are now separate.
+6. History could accept a finite but invalid JavaScript Date timestamp; out-of-range values are rejected.
+7. Background permission/message validation was too sensitive to sender URL query strings; validation now checks extension origin and path.
+8. Some recorder MIME types may vary by browser; MIME and audio format mapping is more explicit, although provider-specific support still varies.
+9. The original More Options view did not provide six separate functional destinations; navigation and corresponding views now exist.
+10. One API-key field could not clearly map multiple services; Groq, Gemini, and OpenRouter have independent saved fields and masked saved-status displays.
+
+Security improvements (not an absolute security guarantee)
+----------------------------------------------------------
+- Online Voice Typing and OpenRouter metered-use consent default to false.
+- Audio-file upload requires explicit Transcribe action plus online consent.
+- Provider keys are not sent to a guessed endpoint from a prefix warning.
+- API keys are sent through HTTPS request headers, not embedded in URLs.
+- Host permissions stay restricted to the three provider domains; no <all_urls> permission was added.
+- No remote JavaScript, CDN script, eval(), or new Function() is used.
+- UI uses text output for untrusted transcript/history/provider messages instead of treating them as HTML.
+- Stored history is bounded and timestamp-validated; raw audio is not saved to history by default.
+- Keys are absent from the release package, and the example key template contains empty values only.
+- Permission rationale and remaining client-side/API provider limitations are documented in docs/PRIVACY_AND_SECURITY.txt.
+
+Current tests and limits
+------------------------
+See docs/TEST_REPORT_EN.txt and docs/TEST_REPORT_FA.txt. Static validation, mocked UI tests, recorder lifecycle mocks, and provider request-contract mocks passed. Real Chrome extension loading, physical microphone capture, live provider calls, real account quotas/billing, arbitrary website insertion, and speech-recognition accuracy remain unverified in this environment.
+
+
+## Small follow-up patch (2026-10-18)
+
+- Added a compact microphone mute/unmute icon beside the recording timer. Muting disables the live MediaStream audio tracks, so the recorder receives silence; the choice is preserved across Pause/Resume and reset for a new recording.
+- Starting a new recording clears the visible transcript editor and refreshes its counters/direction, but only after online consent, provider configuration, and microphone access checks pass. Existing saved history is not cleared.
+- Added localized mute labels and status messages for English, Dari/Persian, Arabic, Urdu, and Pashto.

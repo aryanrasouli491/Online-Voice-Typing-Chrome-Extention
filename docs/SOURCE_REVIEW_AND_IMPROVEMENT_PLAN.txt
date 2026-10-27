@@ -1,0 +1,29 @@
+VOICEFLOW ONLINE — SOURCE REVIEW AND LOW-RISK IMPROVEMENT PLAN
+Review date: 2026-10-18
+Reviewed input: VoiceFlow_Online_Improved_v2.0.0(1).zip
+
+Implemented in this patch
+1. Added a microphone mute/unmute icon next to the recording timer. It disables/enables the audio tracks used by the recorder. It is not a system-wide microphone switch; it affects this extension's active capture only. Mute state survives Pause/Resume and resets for a new session.
+2. A successful new recording start clears the main transcript editor and updates counts and text direction. It does not delete saved history. Text is cleared only after online consent, provider configuration, and microphone access checks have passed.
+3. Added localized labels/messages for English, Dari/Persian, Arabic, Urdu, and Pashto.
+
+Review findings and safe next improvements (not silently changed in this patch)
+- Real Chrome validation: run a manual checklist in the target Chrome version for side-panel dimensions, permission prompts, keyboard focus, and real microphone capture. Automated/static checks cannot prove these behaviors.
+- Recording race cases: test rapid Start/Stop clicks, stopping during startup, Pause during a segment-finalization event, and mute/unmute while a segment is ending. Keep changes limited to any reproducible defect.
+- Provider integration: test each provider separately with a valid key, an invalid key, rate limiting (HTTP 429), network loss, malformed responses, and large audio. Never use real keys in test logs.
+- Model/price drift: provider model names, file constraints, free quotas, and prices change. Re-verify official documentation before changing defaults or promising free use.
+- Long-session storage: test many transcript segments and history entries near storage limits; confirm predictable behavior when storage quota is reached.
+- Accessibility: verify focus visibility, keyboard-only navigation, screen-reader labels, and color contrast for every view and RTL language.
+- RTL/mixed text: test Dari/Persian and mixed Latin/RTL transcript edits, copy/export, and direction after restored history.
+- Permission UX: test denied permission, no device, device busy, and operating-system privacy blocks on real Chrome/OS combinations.
+- Credential handling: extension local storage is inspectable by someone with access to the browser profile/runtime; document the trade-off and never bundle real keys.
+- Feature completeness: manually exercise Audio File to Text, History restore/delete/clear-all, Text Tools, insertion fallback, theme persistence, and every More Options subpage.
+
+Scope protection
+This is a deliberately small patch. Provider architecture, view navigation, history format, storage schema, manifest permissions, and unrelated UI behavior were not intentionally redesigned. The original ZIP is not modified.
+
+Verification status
+- JavaScript syntax: checked.
+- Manifest JSON and HTML/CSS/resource references: checked in the packaging pass.
+- ZIP integrity and root manifest: checked in the packaging pass.
+- Real microphone, installed Chrome UI, and live provider APIs: not verified in this environment.

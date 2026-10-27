@@ -1,0 +1,78 @@
+VoiceFlow Online v2.0.0 — Privacy and Security Notes
+====================================================
+
+Scope
+-----
+VoiceFlow Online is a client-side Chrome Manifest V3 extension. It has no application backend, telemetry, or analytics service. Audio transcription is performed by the third-party provider explicitly selected by the user. This document describes intended data flows and important limits; it is not a guarantee of absolute security.
+
+User consent and audio transfer
+-------------------------------
+- On a fresh installation, Online Voice Typing is disabled.
+- Microphone permission is requested only after a deliberate user action and is requested through the dedicated permission page.
+- Microphone permission is not permission to upload audio.
+- Microphone recording segments are sent to the selected provider only when Online Voice Typing is enabled and a recording has been started.
+- Audio files are sent only after the user explicitly selects a file and presses the Transcribe action, with Online Voice Typing enabled.
+- Requests already submitted to a provider may complete after Online Voice Typing is switched off. The extension does not claim to recall audio already sent over the network.
+- The app uses segmented batch transcription. It does not claim word-by-word real-time recognition.
+
+API keys
+--------
+- Users enter separate Groq, Google Gemini, and OpenRouter keys in More Options > Transcription Settings.
+- Saved keys are stored in chrome.storage.local in the user's Chrome profile. Keys are not embedded in this package, and provider keys are sent only to the selected provider's official HTTPS API endpoint.
+- chrome.storage.local is convenient local storage, not a hardware-backed secret vault. Anyone with sufficient access to the Chrome profile, extension runtime, debugging tools, or a modified extension may be able to extract a key.
+- Never share a Chrome profile or extension folder that contains saved keys. Revoke or rotate any key that may have been exposed.
+- config/apikey.local.example.js contains empty example values and is not loaded by the runtime. A personal config/apikey.local.js is intentionally omitted from the distributed package.
+- Key-prefix recognition is only a hint. It does not validate a key, move it to another provider field, or send it to a guessed service.
+- Do not paste real API keys into support chats, issue reports, screenshots, or logs.
+
+Provider data handling
+----------------------
+- Groq audio requests use the official Groq speech-to-text endpoint.
+- Gemini audio is uploaded to the official Google Generative Language Files API and referenced by a transcription request. The extension attempts to delete the temporary uploaded file after the transcription request finishes. Cleanup is best-effort; a network failure may prevent deletion. Google service retention and processing terms still apply.
+- OpenRouter receives audio and the requested model through its official audio-transcription endpoint. This package treats OpenRouter transcription as usage-based and requires the user's metered-use acknowledgement in the settings before using it.
+- Provider pricing, model availability, quotas, logging, retention, and geographic processing depend on the provider and account terms and may change. Review the current official policies and billing dashboard before use.
+- Requests use HTTPS. HTTPS protects transport but does not mean the provider receives no data or stores it nowhere.
+- A successful API connection test checks API access; it does not prove that a transcription model is enabled or that a request will fit a free quota.
+
+Local storage
+-------------
+- Settings, language/theme preferences, API keys, and transcript history are saved in chrome.storage.local.
+- Transcript history is bounded to the latest 20 items, with a per-item text limit enforced by the storage manager.
+- Raw audio is not saved as transcript history by default.
+- History can be deleted from the History view. Clear All requires confirmation.
+- The transcript itself may contain private material. Delete it when no longer needed and consider who can access the Chrome profile.
+
+Manifest permissions
+--------------------
+- sidePanel: opens the extension side panel.
+- storage: saves local preferences, keys, permission state, and transcript history.
+- activeTab and scripting: support user-invoked insertion of transcript text into a compatible active webpage field. Chrome-protected pages and some sites may block this feature.
+- clipboardWrite: enables the Copy action and clipboard fallback.
+- Host permissions are limited to https://api.groq.com/*, https://generativelanguage.googleapis.com/*, and https://openrouter.ai/*. The extension does not request <all_urls>.
+- Microphone capture uses browser media APIs after user action; microphone permission does not silently imply online upload consent.
+
+Security measures in this version
+---------------------------------
+- No remote JavaScript, CDN code, eval(), or new Function() are used.
+- Transcript text and provider response text are displayed as text rather than trusted HTML.
+- Provider requests use fixed HTTPS endpoints and keep API keys out of URLs.
+- Stored settings and history are normalized and bounded. Invalid out-of-range history timestamps are rejected.
+- Upload actions and OpenRouter metered use require explicit UI actions/consent.
+- The distributed package contains no real API credentials.
+
+Remaining limitations
+---------------------
+- Client-side extensions cannot guarantee API-key secrecy from a person able to inspect or modify the local profile/runtime.
+- Third-party providers process audio outside the extension; review their current terms.
+- Gemini temporary-file deletion is best-effort.
+- This environment did not allow a real Chrome installation, physical microphone, account credentials, or live provider requests to be validated. Mock tests are not a full penetration test, privacy audit, or live integration test.
+- Recognition accuracy, particularly for Dari/accented speech, depends on the selected service/model and should be evaluated with representative samples.
+
+
+NR COMPANY BRANDING AND DISTRIBUTION NOTE (v2.1.0)
+--------------------------------------------------
+The extension includes an About section for NR Company and its founder. About details are hard-coded in sidepanel.html and are not editable through the extension interface. The source owner can edit the canonical repository and ship a new release; existing manually installed copies do not update automatically.
+
+A private GitHub repository restricts access to the repository itself. It does not hide client-side extension source from a person who receives and installs an unpacked extension. The HTML, CSS, JavaScript, manifest, and assets are present on the user's computer and can be inspected or modified. Do not store secrets in the extension. Each user must provide their own API key.
+
+Contact placeholders are marked by an HTML comment containing "CONTACT DETAILS" in sidepanel.html. Replace them before publishing.

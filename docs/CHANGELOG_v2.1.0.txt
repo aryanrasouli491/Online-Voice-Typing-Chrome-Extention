@@ -1,0 +1,8 @@
+Online Voice Typing | NR Company — v2.1.0
+
+- Renamed the user-facing product title to Online Voice Typing.
+- Added NR Company branding and NR toolbar icons.
+- Added a fixed About section with the requested company profile, founder introduction, project summaries, and clearly marked contact placeholders.
+- Added English and Dari/Persian install and GitHub distribution guidance.
+- Clarified that private GitHub access does not hide source code bundled with an unpacked Chrome extension.
+- No API keys or credentials are included.

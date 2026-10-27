@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <title>VoiceFlow — Microphone Permission</title>
+    <link rel="stylesheet" href="css/microphone-permission.css">
+</head>
+<body>
+    <main class="permission-page-shell">
+        <header class="permission-page-header">
+            <div class="permission-page-brand">
+                <span class="permission-page-logo" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M3 10v4M6 7v10M9 4v16M12 8v8M15 5v14M18 8v8M21 10v4" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+                    </svg>
+                </span>
+                <span class="permission-page-brand-copy">
+                    <strong>VoiceFlow</strong>
+                    <span data-page-i18n="eyebrow">ONE-TIME SETUP</span>
+                </span>
+            </div>
+            <span class="permission-page-label">MICROPHONE</span>
+        </header>
+
+        <section class="permission-card-main" aria-labelledby="permissionTitle">
+            <div class="permission-hero-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <rect x="9" y="3" width="6" height="11" rx="3" fill="currentColor" />
+                    <path d="M6.5 10.5a5.5 5.5 0 0 0 11 0M12 16v4m-3 0h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                </svg>
+            </div>
+
+            <p class="permission-eyebrow" data-page-i18n="eyebrow">ONE-TIME SETUP</p>
+            <h1 id="permissionTitle" data-page-i18n="title">Allow microphone access</h1>
+            <p class="permission-intro" data-page-i18n="intro">Chrome does not reliably show microphone permission prompts inside an extension side panel. This page opens the permission flow in a normal tab.</p>
+
+            <div id="permissionStatus" class="permission-status" role="status" aria-live="polite" data-page-i18n="status">
+                Your microphone has not been accessed yet.
+            </div>
+
+            <p id="permissionDescription" class="permission-description" data-page-i18n="stateUnknown">
+                If Chrome shows a prompt, choose Allow. Permission is separate from permission to send audio online.
+            </p>
+
+            <div class="permission-actions">
+                <button id="requestPermissionButton" class="permission-button permission-button-primary" type="button" data-page-i18n="requestButton">
+                    Enable Microphone
+                </button>
+                <button id="openSettingsButton" class="permission-button permission-button-secondary" type="button" data-page-i18n="settingsButton" hidden>
+                    Open Chrome Microphone Settings
+                </button>
+                <button id="closePermissionTabButton" class="permission-button permission-button-link" type="button" data-page-i18n="closeButton">
+                    Close this tab and return to VoiceFlow
+                </button>
+            </div>
+
+            <div class="permission-privacy-note">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M12 3 19 6v5c0 4.4-3 7.7-7 10-4-2.3-7-5.6-7-10V6l7-3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
+                    <path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <p data-page-i18n="privacy">This step only checks microphone permission. It does not start a recording or upload audio to a service.</p>
+            </div>
+        </section>
+
+        <footer class="permission-page-footer" data-page-i18n="footer">
+            After allowing access, return to the VoiceFlow side panel and click Start Recording.
+        </footer>
+    </main>
+    <script src="js/microphone-permission.js"></script>
+</body>
+</html>

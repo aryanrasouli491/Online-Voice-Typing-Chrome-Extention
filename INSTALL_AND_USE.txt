@@ -1,0 +1,29 @@
+ONLINE VOICE TYPING | NR COMPANY — INSTALLATION AND USER GUIDE
+
+INSTALL IN CHROME
+1. Download the release ZIP and extract it to a normal folder.
+2. Open chrome://extensions in Chrome.
+3. Enable Developer mode.
+4. Click Load unpacked.
+5. Select the extracted folder that contains manifest.json directly.
+
+FIRST-TIME SETUP
+1. Open More Options > Transcription Settings.
+2. Choose a supported provider and paste your own API key into its matching field. Save the key and choose a compatible model.
+3. Return to the home screen and click Enable microphone. Allow access in Chrome.
+4. Turn on Online Voice Typing. Microphone permission and consent to send audio online are separate choices.
+5. Click Start recording and speak. Brief natural pauses submit speech segments for transcription.
+6. Use Pause/Resume when needed and Stop when finished. Use Copy or Export to save your text.
+
+IMPORTANT PRIVACY AND AVAILABILITY NOTES
+- This is an online extension and requires a supported transcription API and internet access. It is not an offline AI system.
+- The selected provider receives audio when online transcription is enabled and a transcription action is running. Review that provider's privacy and billing terms.
+- Each user must supply their own API key. No real key is included in the package. Free quotas are not guaranteed.
+- Some providers or their API endpoints may be blocked by a local network or country. This extension cannot bypass such restrictions.
+- A Chrome extension's client-side files can be inspected or changed by a user who has the installed unpacked package. Private GitHub protects the repository, not the files on a user's computer.
+
+UPDATE THE EXTENSION
+To install a new release, download and extract the updated package, then use Reload on the extension card in chrome://extensions and ensure Chrome points to the intended folder. Existing manually installed copies do not automatically receive changes from the developer's private repository.
+
+NR COMPANY ABOUT SECTION
+To update company or contact details for future releases, edit the marked NR Company section in sidepanel.html. Search for CONTACT DETAILS to find the contact placeholders. Repackage and redistribute the new version after editing.
