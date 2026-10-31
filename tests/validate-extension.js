@@ -29,6 +29,13 @@ function checkManifest() {
     assert(manifest.name === "Online Voice Typing | NR Company", "Manifest name must preserve the NR Company identity.");
     assert(!manifest.permissions.includes("<all_urls>"), "Do not request the broad <all_urls> permission.");
     assert(!manifest.host_permissions.includes("<all_urls>"), "Do not request broad host access.");
+    const csp = manifest.content_security_policy && manifest.content_security_policy.extension_pages;
+    assert(typeof csp === "string" && csp.includes("script-src 'self'"), "Manifest must define a self-only script Content Security Policy.");
+    ["api.groq.com", "generativelanguage.googleapis.com", "openrouter.ai"].forEach((host) => {
+        assert(csp.includes(host), `Content Security Policy is missing provider host: ${host}`);
+    });
+    assert(localFileExists("LICENSE"), "A repository license file is required.");
+    assert(localFileExists("docs/USER_GUIDE.md"), "The canonical user guide is required.");
 
     const localResources = [
         manifest.background && manifest.background.service_worker,

@@ -251,7 +251,10 @@
     }
 
     function formatError(error) {
-        const message = String(error && error.message ? error.message : "");
+        const message = String(error && error.message ? error.message : "")
+            .replace(/(authorization\s*[:=]\s*(?:bearer\s+)?)\S+/gi, "$1[redacted]")
+            .replace(/([?&](?:api[_-]?key|key)=)[^&\s]+/gi, "$1[redacted]")
+            .replace(/\b(gsk_[A-Za-z0-9_-]{8,}|AIza[A-Za-z0-9_-]{8,}|sk-or-v1-[A-Za-z0-9_-]{8,})\b/g, "[redacted API key]");
         const lowerMessage = message.toLowerCase();
 
         if (lowerMessage.includes("401") || lowerMessage.includes("unauthorized") || lowerMessage.includes("api key") || lowerMessage.includes("invalid key")) {
@@ -337,14 +340,14 @@
 
             showToast(translate("microphonePermissionPageOpened"));
         } catch (error) {
-            console.error("VoiceFlow could not open the microphone permission page:", error);
+            console.error("Online Voice Typing could not open the microphone permission page.");
             showToast(translate("microphoneSettingsHelp"), true);
         } finally {
             microphonePermissionPending = false;
             elements.enableMicrophoneButton.disabled = false;
         }
 
-        // Recording starts only after the user returns to VoiceFlow and clicks Start.
+        // Recording starts only after the user returns and clicks Start.
         return false;
     }
 
@@ -463,7 +466,7 @@
                     await saveCurrentSessionHistory();
                 }
             } catch (error) {
-                console.error("VoiceFlow transcription segment failed:", error.message);
+                console.error("Online Voice Typing transcription segment failed.");
                 showToast(translate("segmentFailed") + " " + formatError(error), true);
             } finally {
                 pendingSegmentCount = Math.max(0, pendingSegmentCount - 1);

@@ -145,5 +145,11 @@ vite.config.ts.timestamp-*
 # Astro generated types
 .astro/
 
+# Personal extension credentials must never be committed.
+config/apikey.local.js
+*.pem
+*.p12
+*.key
+
 # Turbo Repo
 .turbo

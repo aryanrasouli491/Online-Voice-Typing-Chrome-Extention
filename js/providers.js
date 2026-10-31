@@ -200,6 +200,15 @@
         }
     }
 
+    // Provider messages can occasionally echo request details. Keep API keys out of
+    // notifications, console output, and any error object passed back to the UI.
+    function redactSensitiveText(value) {
+        return String(value || "")
+            .replace(/(authorization\s*[:=]\s*(?:bearer\s+)?)\S+/gi, "$1[redacted]")
+            .replace(/([?&](?:api[_-]?key|key)=)[^&\s]+/gi, "$1[redacted]")
+            .replace(/\b(gsk_[A-Za-z0-9_-]{8,}|AIza[A-Za-z0-9_-]{8,}|sk-or-v1-[A-Za-z0-9_-]{8,})\b/g, "[redacted API key]");
+    }
+
     async function responseError(response) {
         let errorMessage = "Provider request failed with status " + response.status + ".";
 
@@ -217,7 +226,9 @@
             // Keep the simple status message when the provider returns no JSON.
         }
 
-        const safeMessage = String(errorMessage).replace(/[\r\n\t]+/g, " ").slice(0, 360);
+        const safeMessage = redactSensitiveText(errorMessage)
+            .replace(/[\r\n\t]+/g, " ")
+            .slice(0, 360);
         return new Error(safeMessage || "Provider request failed.");
     }
 

@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Online Voice Typing | NR Company",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Online Voice Typing by NR Company — multilingual speech-to-text for Chrome.",
   "minimum_chrome_version": "114",
   "permissions": [
@@ -16,6 +16,9 @@
     "https://generativelanguage.googleapis.com/*",
     "https://openrouter.ai/*"
   ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src https://api.groq.com https://generativelanguage.googleapis.com https://openrouter.ai; img-src 'self' data:"
+  },
   "background": {
     "service_worker": "js/background.js"
   },

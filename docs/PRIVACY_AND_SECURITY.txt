@@ -1,9 +1,9 @@
-VoiceFlow Online v2.0.0 — Privacy and Security Notes
-====================================================
+Online Voice Typing | NR Company v2.3.0 — Privacy and Security Notes
+=====================================================================
 
 Scope
 -----
-VoiceFlow Online is a client-side Chrome Manifest V3 extension. It has no application backend, telemetry, or analytics service. Audio transcription is performed by the third-party provider explicitly selected by the user. This document describes intended data flows and important limits; it is not a guarantee of absolute security.
+Online Voice Typing is a client-side Chrome Manifest V3 extension by NR Company. It has no application backend, telemetry, or analytics service. Audio transcription is performed by the third-party provider explicitly selected by the user. This document describes intended data flows and important limits; it is not a guarantee of absolute security.
 
 User consent and audio transfer
 -------------------------------
@@ -48,14 +48,14 @@ Manifest permissions
 - storage: saves local preferences, keys, permission state, and transcript history.
 - activeTab and scripting: support user-invoked insertion of transcript text into a compatible active webpage field. Chrome-protected pages and some sites may block this feature.
 - clipboardWrite: enables the Copy action and clipboard fallback.
-- Host permissions are limited to https://api.groq.com/*, https://generativelanguage.googleapis.com/*, and https://openrouter.ai/*. The extension does not request <all_urls>.
+- Host permissions and the extension Content Security Policy are limited to https://api.groq.com/*, https://generativelanguage.googleapis.com/*, and https://openrouter.ai/*. The extension does not request <all_urls>.
 - Microphone capture uses browser media APIs after user action; microphone permission does not silently imply online upload consent.
 
 Security measures in this version
 ---------------------------------
 - No remote JavaScript, CDN code, eval(), or new Function() are used.
 - Transcript text and provider response text are displayed as text rather than trusted HTML.
-- Provider requests use fixed HTTPS endpoints and keep API keys out of URLs.
+- Provider requests use fixed HTTPS endpoints and keep API keys out of URLs. Recognizable keys and authorization values are redacted from returned error messages before they are shown or logged.
 - Stored settings and history are normalized and bounded. Invalid out-of-range history timestamps are rejected.
 - Upload actions and OpenRouter metered use require explicit UI actions/consent.
 - The distributed package contains no real API credentials.

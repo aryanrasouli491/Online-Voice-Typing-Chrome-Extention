@@ -1,4 +1,4 @@
-# Online Voice Typing | NR Company v2.2.0
+# Online Voice Typing | NR Company v2.3.0
 
 Online Voice Typing is a standalone Chrome Manifest V3 extension for online speech-to-text. It is a lightweight, client-side NR Company project with no backend, account system, analytics, or bundled API key.
 
@@ -14,13 +14,11 @@ Online Voice Typing is a standalone Chrome Manifest V3 extension for online spee
 
 The extension uses online transcription providers. It cannot bypass provider or network restrictions in a country or network; if a provider is blocked, the user needs a legally available supported provider or network. No API key is included in this package. Provider quotas, pricing, model access, and free allowances can change.
 
-## GitHub privacy and distribution
+## Download, distribution, and source visibility
 
-- Keep the canonical development repository **Private** if you do not want the public to browse its files. Do not invite people as collaborators unless you want them to access that repository.
-- A private repository cannot be downloaded by friends who have no repository access. For easier sharing, give them a separate release ZIP or publish the extension through the Chrome Web Store after meeting its requirements.
-- Important limitation: a Chrome extension loaded unpacked contains its HTML, CSS, JavaScript, images, and manifest on the user's computer. Those files can be inspected or changed locally. A private GitHub repository protects the canonical repository; it does not make client-side extension code secret.
-- The About content is not editable through the extension UI. To change it for future downloads, edit the marked section in `sidepanel.html`, update the package, and distribute the new version. Existing installations will not automatically receive changes from your private repository.
-- Never commit real API keys. Users should create and store their own keys. Direct client-side API keys are not completely secret from a person who can inspect their own browser profile or extension files.
+This is a public open-source repository. Anyone who installs an unpacked Chrome extension receives its HTML, CSS, JavaScript, images, and Manifest, so client-side code must never contain a real API key. Users should always create and use their own key. A local key file is ignored by Git, but Chrome profile storage is still not an encrypted secret vault.
+
+For the shortest installation and API-key instructions, read [docs/USER_GUIDE.md](docs/USER_GUIDE.md). The About content is not editable in the extension UI; maintainers can update the marked `CONTACT DETAILS` block in `sidepanel.html` for future releases.
 
 ## Editing the NR Company About section
 
@@ -56,7 +54,7 @@ Starting a successful new recording clears only the main editor. It does not rem
 - If microphone access is blocked, open Chrome microphone settings from the extension. For unavailable/busy microphones, reconnect the device, close competing applications, and check operating-system microphone privacy settings.
 - A failed transcription can indicate an invalid key, missing model access, quota/billing limit, or network problem. A connection test does not guarantee model availability.
 
-See `README_FA.txt` for Dari/Persian installation guidance and `docs/PRIVACY_AND_SECURITY.txt` for detailed data-flow and security limitations.
+See `README_FA.txt` for Dari/Persian installation guidance, [docs/USER_GUIDE.md](docs/USER_GUIDE.md) for the canonical setup guide, and `docs/PRIVACY_AND_SECURITY.txt` for detailed data-flow and security limitations.
 
 ## Development and verification
 
@@ -64,6 +62,7 @@ No build step or runtime dependencies are required. Run the dependency-free chec
 
 ```powershell
 node tests/validate-extension.js
+node tests/providers.test.js
 Get-ChildItem js -Filter *.js | ForEach-Object { node --check $_.FullName }
 ```
 
@@ -73,4 +72,4 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) before sending changes and use [SECURITY
 
 ## License
 
-No `LICENSE` file is present in the current repository history. A license should be selected and added by the repository owner before public redistribution so contributors and users know their rights. This update does not invent or replace the project's legal terms.
+Released under the [MIT License](LICENSE). Copyright © 2026 NR Company / Nooraqa Rasouli.

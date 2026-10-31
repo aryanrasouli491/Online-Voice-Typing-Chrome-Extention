@@ -20,7 +20,10 @@ IMPORTANT PRIVACY AND AVAILABILITY NOTES
 - The selected provider receives audio when online transcription is enabled and a transcription action is running. Review that provider's privacy and billing terms.
 - Each user must supply their own API key. No real key is included in the package. Free quotas are not guaranteed.
 - Some providers or their API endpoints may be blocked by a local network or country. This extension cannot bypass such restrictions.
-- A Chrome extension's client-side files can be inspected or changed by a user who has the installed unpacked package. Private GitHub protects the repository, not the files on a user's computer.
+- This public repository and every unpacked copy expose client-side code to its user. Never put a real API key into source files, screenshots, support messages, or commits.
+
+CANONICAL USER GUIDE
+For the current step-by-step installation, API-key setup, privacy, and troubleshooting guide, open docs/USER_GUIDE.md.
 
 UPDATE THE EXTENSION
 To install a new release, download and extract the updated package, then use Reload on the extension card in chrome://extensions and ensure Chrome points to the intended folder. Existing manually installed copies do not automatically receive changes from the developer's private repository.
